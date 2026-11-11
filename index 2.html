@@ -1,0 +1,3570 @@
+<!DOCTYPE html>
+<html lang="ru" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>WebStudio Questionnaire</title>
+  <meta name="description" content="Анкета для клиентов веб-студии: подробный опрос перед разработкой сайта">
+  <meta name="theme-color" content="#4f6ef7">
+  
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Анкета сайта">
+  
+  <style>
+/* WebStudio Questionnaire — дизайн-система */
+:root {
+  --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, "Helvetica Neue", Arial, sans-serif;
+  --radius: 12px; --radius-sm: 8px;
+  --accent: #4f6ef7; --accent-hover: #3d5bf0; --accent-soft: rgba(79,110,247,.1);
+  --green: #16a34a; --green-soft: rgba(22,163,74,.12);
+  --red: #dc2626; --red-soft: rgba(220,38,38,.1);
+  --amber: #d97706; --amber-soft: rgba(217,119,6,.12);
+  --violet: #7c3aed; --violet-soft: rgba(124,58,237,.12);
+  --blue: #2563eb; --blue-soft: rgba(37,99,235,.12);
+  --shadow: 0 1px 3px rgba(16,24,40,.07), 0 1px 2px rgba(16,24,40,.04);
+  --shadow-lg: 0 12px 32px rgba(16,24,40,.14);
+  --trans: .18s ease;
+}
+[data-theme="light"] {
+  --bg: #f6f7f9; --bg-card: #ffffff; --bg-elev: #ffffff; --bg-input: #ffffff;
+  --bg-hover: #f1f3f7; --border: #e4e7ec; --border-strong: #cfd4dc;
+  --text: #16181d; --text-2: #4b5260; --text-3: #8a91a0;
+}
+[data-theme="dark"] {
+  --bg: #101216; --bg-card: #181b21; --bg-elev: #1e2229; --bg-input: #1e2229;
+  --bg-hover: #222630; --border: #2a2f3a; --border-strong: #3a4150;
+  --text: #eceef2; --text-2: #aab0bd; --text-3: #6f7685;
+  --shadow: 0 1px 3px rgba(0,0,0,.4); --shadow-lg: 0 12px 32px rgba(0,0,0,.5);
+  --accent-soft: rgba(79,110,247,.18);
+}
+* { box-sizing: border-box; margin: 0; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  font-family: var(--font); background: var(--bg); color: var(--text);
+  font-size: 15px; line-height: 1.55; min-height: 100dvh;
+  transition: background var(--trans), color var(--trans);
+}
+button, input, select, textarea { font: inherit; color: inherit; }
+a { color: var(--accent); text-decoration: none; }
+h1 { font-size: 24px; font-weight: 700; letter-spacing: -.02em; }
+h2 { font-size: 19px; font-weight: 650; letter-spacing: -.01em; }
+h3 { font-size: 16px; font-weight: 600; }
+.muted { color: var(--text-2); } .dim { color: var(--text-3); font-size: 13px; }
+
+/* ---------- Кнопки ---------- */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  padding: 10px 18px; border-radius: var(--radius-sm); border: 1px solid transparent;
+  font-weight: 550; font-size: 14.5px; cursor: pointer; background: var(--bg-hover);
+  color: var(--text); transition: all var(--trans); min-height: 42px; -webkit-tap-highlight-color: transparent;
+}
+.btn:hover { filter: brightness(1.04); }
+.btn:active { transform: scale(.98); }
+.btn-primary { background: var(--accent); color: #fff; box-shadow: var(--shadow); }
+.btn-primary:hover { background: var(--accent-hover); }
+.btn-ghost { background: transparent; border-color: var(--border); }
+.btn-ghost:hover { background: var(--bg-hover); }
+.btn-danger { background: var(--red); color: #fff; }
+.btn-sm { padding: 6px 12px; min-height: 32px; font-size: 13px; }
+.btn[disabled] { opacity: .5; pointer-events: none; }
+.btn-icon { padding: 8px; min-height: 38px; min-width: 38px; }
+
+/* ---------- Карточки ---------- */
+.card {
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: var(--radius); box-shadow: var(--shadow); padding: 20px;
+}
+
+/* ---------- Поля ввода ---------- */
+.field { margin-bottom: 22px; }
+.field label.q-label { display: block; font-weight: 600; margin-bottom: 6px; font-size: 15px; }
+.req { color: var(--red); margin-left: 3px; }
+.hint { color: var(--text-2); font-size: 13px; margin: -2px 0 8px; }
+.example { color: var(--text-3); font-size: 12.5px; margin-top: 5px; }
+.input, textarea.input, select.input {
+  width: 100%; padding: 11px 13px; border-radius: var(--radius-sm);
+  border: 1.5px solid var(--border); background: var(--bg-input);
+  transition: border var(--trans), box-shadow var(--trans); font-size: 16px;
+  appearance: none; -webkit-appearance: none;
+}
+.input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+textarea.input { min-height: 88px; resize: vertical; }
+select.input {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238a91a0' stroke-width='1.8' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 13px center; padding-right: 36px;
+}
+.field.error .input { border-color: var(--red); }
+.err-msg { color: var(--red); font-size: 13px; margin-top: 5px; }
+
+/* ---------- Чекбоксы / радио (chips) ---------- */
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip {
+  display: inline-flex; align-items: center; gap: 7px; padding: 9px 14px;
+  border: 1.5px solid var(--border); border-radius: 100px; cursor: pointer;
+  background: var(--bg-input); transition: all var(--trans); font-size: 14px; user-select: none;
+}
+.chip:hover { border-color: var(--border-strong); }
+.chip.on { border-color: var(--accent); background: var(--accent-soft); color: var(--accent); font-weight: 560; }
+.chip input { display: none; }
+
+/* ---------- Карточки типов сайта ---------- */
+.typegrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; }
+.typecard {
+  border: 1.5px solid var(--border); border-radius: var(--radius); padding: 16px 12px;
+  text-align: center; cursor: pointer; background: var(--bg-input); transition: all var(--trans);
+}
+.typecard:hover { border-color: var(--border-strong); transform: translateY(-1px); }
+.typecard.on { border-color: var(--accent); background: var(--accent-soft); box-shadow: 0 0 0 1px var(--accent); }
+.typecard .ic { font-size: 26px; display: block; margin-bottom: 6px; }
+.typecard .tl { font-size: 13.5px; font-weight: 560; line-height: 1.3; }
+
+/* ---------- Матрицы приоритетов ---------- */
+.matrix { border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
+.mrow { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; padding: 11px 14px; border-bottom: 1px solid var(--border); }
+.mrow:last-child { border-bottom: none; }
+.mrow:nth-child(even) { background: color-mix(in srgb, var(--bg-hover) 45%, transparent); }
+.mrow .mlabel { flex: 1 1 180px; font-size: 14px; font-weight: 500; }
+.seg { display: inline-flex; background: var(--bg-hover); border-radius: 9px; padding: 3px; gap: 2px; flex-wrap: wrap; }
+.seg button {
+  border: none; background: transparent; padding: 6px 10px; border-radius: 7px;
+  font-size: 12.5px; cursor: pointer; color: var(--text-2); transition: all var(--trans); white-space: nowrap;
+}
+.seg button.on { background: var(--bg-card); color: var(--text); font-weight: 600; box-shadow: var(--shadow); }
+.seg button.on[data-v="must"] { color: var(--accent); }
+.seg button.on[data-v="want"], .seg button.on[data-v="part"] { color: var(--amber); }
+.seg button.on[data-v="ready"] { color: var(--green); }
+
+/* ---------- Прогресс ---------- */
+.progress-wrap { position: sticky; top: 0; z-index: 20; background: var(--bg); padding: 10px 0 6px; }
+.pbar { height: 6px; border-radius: 3px; background: var(--border); overflow: hidden; }
+.pbar > div { height: 100%; background: linear-gradient(90deg, var(--accent), #7c9bff); border-radius: 3px; transition: width .35s ease; }
+.steps { display: flex; gap: 4px; overflow-x: auto; padding: 8px 0 2px; scrollbar-width: none; }
+.steps::-webkit-scrollbar { display: none; }
+.step-pill {
+  flex-shrink: 0; font-size: 12px; padding: 5px 11px; border-radius: 100px;
+  background: var(--bg-hover); color: var(--text-2); cursor: pointer; border: 1px solid transparent; white-space: nowrap;
+}
+.step-pill.on { background: var(--accent); color: #fff; font-weight: 600; }
+.step-pill.done { color: var(--green); background: var(--green-soft); }
+
+/* ---------- Файлы ---------- */
+.dropzone {
+  border: 2px dashed var(--border-strong); border-radius: var(--radius); padding: 22px;
+  text-align: center; color: var(--text-2); cursor: pointer; transition: all var(--trans); background: var(--bg-input);
+}
+.dropzone:hover, .dropzone.drag { border-color: var(--accent); background: var(--accent-soft); }
+.filelist { margin-top: 10px; display: flex; flex-direction: column; gap: 7px; }
+.fileitem {
+  display: flex; align-items: center; gap: 10px; padding: 9px 12px;
+  background: var(--bg-hover); border-radius: var(--radius-sm); font-size: 13.5px;
+}
+.fileitem .fname { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.fileitem .fdel { color: var(--red); cursor: pointer; background: none; border: none; padding: 4px 8px; font-size: 15px; }
+
+/* ---------- Toast ---------- */
+#toasts { position: fixed; bottom: 18px; left: 50%; transform: translateX(-50%); z-index: 1000; display: flex; flex-direction: column; gap: 8px; width: min(420px, calc(100vw - 32px)); }
+.toast {
+  background: var(--bg-elev); border: 1px solid var(--border); color: var(--text);
+  padding: 12px 16px; border-radius: var(--radius-sm); box-shadow: var(--shadow-lg);
+  font-size: 14px; opacity: 0; transform: translateY(8px); transition: all .3s ease;
+}
+.toast.show { opacity: 1; transform: none; }
+.toast-success { border-left: 3px solid var(--green); }
+.toast-error { border-left: 3px solid var(--red); }
+.toast-info { border-left: 3px solid var(--accent); }
+
+/* ---------- Модальные окна ---------- */
+.modal-backdrop {
+  position: fixed; inset: 0; background: rgba(8,10,14,.55); z-index: 900;
+  display: flex; align-items: center; justify-content: center; padding: 16px; backdrop-filter: blur(3px);
+}
+.modal { background: var(--bg-card); border-radius: 16px; padding: 24px; width: min(460px, 100%); box-shadow: var(--shadow-lg); max-height: 85dvh; overflow: auto; }
+.modal h3 { margin-bottom: 8px; }
+.modal p { color: var(--text-2); font-size: 14px; }
+.modal-actions { display: flex; justify-content: flex-end; gap: 10px; margin-top: 20px; }
+
+/* ---------- Раскладки ---------- */
+.container { max-width: 760px; margin: 0 auto; padding: 16px 16px calc(40px + env(safe-area-inset-bottom)); }
+.wide { max-width: 1180px; }
+.topbar { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 14px 0; }
+.brand { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 16px; letter-spacing: -.01em; }
+.brand .logo { width: 32px; height: 32px; border-radius: 9px; background: linear-gradient(135deg, var(--accent), #8b5cf6); display: flex; align-items: center; justify-content: center; color: #fff; font-size: 15px; font-weight: 800; }
+.nav-actions { display: flex; gap: 8px; align-items: center; }
+
+/* админ */
+.admin-layout { display: grid; grid-template-columns: 220px 1fr; gap: 0; min-height: 100dvh; }
+.sidebar { border-right: 1px solid var(--border); background: var(--bg-card); padding: 18px 12px; display: flex; flex-direction: column; gap: 4px; position: sticky; top: 0; height: 100dvh; }
+.sidebar .brand { padding: 0 8px 16px; }
+.navlink { display: flex; gap: 10px; align-items: center; padding: 9px 12px; border-radius: var(--radius-sm); color: var(--text-2); font-size: 14px; font-weight: 520; cursor: pointer; }
+.navlink:hover { background: var(--bg-hover); color: var(--text); }
+.navlink.on { background: var(--accent-soft); color: var(--accent); font-weight: 620; }
+.admin-main { padding: 22px; min-width: 0; }
+@media (max-width: 860px) {
+  .admin-layout { grid-template-columns: 1fr; }
+  .sidebar { position: static; height: auto; flex-direction: row; overflow-x: auto; border-right: none; border-bottom: 1px solid var(--border); padding: 10px 12px; align-items: center; }
+  .sidebar .brand { padding: 0 10px 0 0; }
+  .navlink { white-space: nowrap; }
+  .admin-main { padding: 16px 14px; }
+}
+
+/* статистика */
+.statgrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin-bottom: 18px; }
+.stat { padding: 16px; }
+.stat .num { font-size: 26px; font-weight: 750; letter-spacing: -.02em; }
+.stat .lbl { color: var(--text-2); font-size: 13px; margin-top: 2px; }
+.chartgrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 14px; }
+
+/* таблица анкет */
+.qlist { display: flex; flex-direction: column; gap: 10px; }
+.qrow { display: flex; gap: 14px; align-items: center; padding: 14px 16px; cursor: pointer; transition: all var(--trans); }
+.qrow:hover { border-color: var(--border-strong); transform: translateY(-1px); box-shadow: var(--shadow-lg); }
+.qrow .qmain { flex: 1; min-width: 0; }
+.qrow .qtitle { font-weight: 620; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.qrow .qsub { font-size: 13px; color: var(--text-2); margin-top: 2px; }
+.badge { display: inline-flex; align-items: center; padding: 3px 10px; border-radius: 100px; font-size: 12px; font-weight: 620; }
+.badge-gray { background: var(--bg-hover); color: var(--text-2); }
+.badge-blue { background: var(--blue-soft); color: var(--blue); }
+.badge-green { background: var(--green-soft); color: var(--green); }
+.badge-violet { background: var(--violet-soft); color: var(--violet); }
+.badge-dim { background: var(--bg-hover); color: var(--text-3); }
+.badge-amber { background: var(--amber-soft); color: var(--amber); }
+.filters { display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0; }
+.filters .input { width: auto; flex: 1 1 160px; min-width: 130px; padding: 8px 12px; font-size: 14px; }
+
+/* карточка анкеты (просмотр) */
+.kv { display: grid; grid-template-columns: 220px 1fr; gap: 6px 16px; font-size: 14px; }
+.kv .k { color: var(--text-2); }
+.kv .v { white-space: pre-wrap; word-break: break-word; }
+@media (max-width: 640px) { .kv { grid-template-columns: 1fr; } .kv .k { font-size: 12.5px; margin-top: 6px; } }
+.section-block { margin-bottom: 18px; }
+.section-block h3 { margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+
+/* заметки */
+.note { background: var(--amber-soft); border-radius: var(--radius-sm); padding: 10px 14px; font-size: 14px; margin-bottom: 8px; }
+.note .dim { margin-top: 4px; }
+
+/* графики */
+.chart-svg { width: 100%; height: auto; display: block; }
+.legend { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px; font-size: 12.5px; color: var(--text-2); }
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+.legend i { width: 10px; height: 10px; border-radius: 3px; display: inline-block; }
+
+/* review */
+.review-q { padding: 10px 0; border-bottom: 1px dashed var(--border); font-size: 14px; }
+.review-q .rq { color: var(--text-2); font-size: 13px; }
+.review-q .ra { margin-top: 2px; white-space: pre-wrap; }
+
+/* welcome */
+.hero { text-align: center; padding: 44px 16px 26px; }
+.hero h1 { font-size: 30px; margin-bottom: 10px; }
+.hero p { color: var(--text-2); max-width: 480px; margin: 0 auto 24px; }
+.hero-actions { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+
+/* навигация мастера */
+.wiz-nav { display: flex; gap: 10px; margin-top: 26px; position: sticky; bottom: 0; background: linear-gradient(transparent, var(--bg) 30%); padding: 14px 0 calc(8px + env(safe-area-inset-bottom)); }
+.wiz-nav .btn { flex: 1; }
+.wiz-nav .btn-primary { flex: 2; }
+
+/* consent */
+.consent-box { background: var(--bg-hover); border-radius: var(--radius); padding: 14px 16px; font-size: 13.5px; color: var(--text-2); }
+.consent-box label { display: flex; gap: 10px; align-items: flex-start; margin-top: 10px; color: var(--text); font-weight: 550; cursor: pointer; }
+.consent-box input { width: 18px; height: 18px; margin-top: 2px; accent-color: var(--accent); }
+
+@media (max-width: 640px) {
+  h1 { font-size: 21px; }
+  .card { padding: 16px; }
+  .statgrid { grid-template-columns: repeat(2, 1fr); }
+  .mrow .mlabel { flex-basis: 100%; }
+}
+
+/* ---------- Печать (экспорт в PDF) ---------- */
+@media print {
+  body { background: #fff; color: #111; font-size: 12px; }
+  .no-print, .sidebar, .wiz-nav, #toasts, .topbar .nav-actions { display: none !important; }
+  .card { border: none; box-shadow: none; padding: 0; }
+  .admin-layout { display: block; }
+  .admin-main { padding: 0; }
+  .section-block { break-inside: avoid; }
+  .kv { grid-template-columns: 200px 1fr; }
+}
+
+/* ---------- Кнопка «назад», панель клавиатуры ---------- */
+.topbar-left { display: flex; align-items: center; gap: 10px; min-width: 0; }
+.topbar-left h1 { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.kbd-bar {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 950; display: none;
+  justify-content: flex-end; padding: 6px 12px; background: var(--bg-elev);
+  border-top: 1px solid var(--border); box-shadow: 0 -4px 14px rgba(16,24,40,.08);
+}
+.kbd-bar.show { display: flex; }
+@media (max-width: 480px) { .brand-name { display: none; } }
+@media (pointer: coarse) { .filters .input { font-size: 16px; } }
+
+/* ---------- Выбор и удаление анкет ---------- */
+.rowchk { width: 20px; height: 20px; accent-color: var(--accent); flex-shrink: 0; cursor: pointer; }
+.qrow.sel { border-color: var(--accent); background: var(--accent-soft); }
+.row-del { color: var(--red); flex-shrink: 0; }
+.row-del:hover { background: var(--red-soft); }
+.selbar { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; padding: 10px 14px; margin-bottom: 10px; position: sticky; top: 8px; z-index: 15; }
+.selbar[hidden] { display: none; }
+.selbar b { margin-right: 6px; }
+.datefield { display: flex; flex-direction: column; flex: 1 1 150px; min-width: 130px; }
+.datefield span { font-size: 11.5px; color: var(--text-3); margin: 0 0 2px 4px; }
+.datefield .input { width: 100%; flex: none; }
+.empty { text-align: center; padding: 34px 16px; color: var(--text-2); }
+.empty .big { font-size: 34px; margin-bottom: 6px; }
+.savestate { text-align: right; font-size: 12px; color: var(--text-3); margin-top: 3px; min-height: 16px; }
+.recent-row { display: flex; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--border); cursor: pointer; }
+.recent-row:last-child { border-bottom: none; }
+.recent-row:hover .rt { color: var(--accent); }
+.recent-row .rt { font-weight: 600; flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+</style>
+  <link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAYAAAA9zQYyAAAN20lEQVR4Xu2dy28cWRXGb7Wdh52JkjiZJM5MnDi2Z1iMBpDQCITEluXA8BSCBVteCxbMAOEhBOIlNgxsWCDx2PCYgVkisR6NGIk/IHa73bYTO7aTTOJXHnYXOrddodyp6qpT51Z33ePvJ7VkyXb17arvnvvdc+69HZgK8PI3tsMKNAM44K1fDwUOLlOYvrz5y1/fgoAPCG+9PtxTjfXszSBi0AtxlyroTyASgxT+WVLkLkXQEDLIi2th1/K+cV4gZsDBtV6cRehPwl4AIf9wYEOcRGiIGbjAhY5EEdpFAwBIomi0LizoV2AxQMm8WcCCFLIcEDPoBUV0xo7Qr3wNVT7QW978Tf5qI0vQn4KYQZ94I6eoc1sOiBn0k7z6yyXovBcDoEzy6DDTcnwaNgNUjL93sR+5IjQAvtBV0IjOoIp002Wq5fgMrAaoOH9LsB6wHEAViYJGdAY+kKTTJyzHZ7+KSiDwi7/+9v+VRFgOoIp9gkZ0Bj4S1+1g/ANkVlkAqDiwHEAVjwX9OUwGgcdE+n1sOWA3gAZgOYAqbGD+POwGUIK1HLAbQAttD42zQIES4KGBKoIvfAVrN4AeEKGBKiBooIpBZDiAJhChgSogaKAKWA6gCkRooIpBVAmBJmA5gCpgOYAqIGigClgOoApEaKAKCBqoApYDqAIRGqgCggaqGAywnxAoAhEaqAKCBqpAlgOoAhEaqGLf+dBV5fRIYH75k6Oi5r3z7q753e8fiq6RxvNTNfPqN4+Irn1jKTRXf3RfdI00hocC8/qvjppAsIH0X//eMX9541Ep7XOJF5bj9u3QvkZGij+R5yZrpR15RteWMno+MMePBWZj033aaWqiJhIzMVNvlXb/XCJ/Ej3i2kxL9E4jpwIb6cuABCOFouekg+sk8dyUvH3TwvvfK+SftEdM12WCJlxE0k5IiBNX3NzGKQeRPgnpdW/eDM36hvuRowy8sBzE9LRc0PRg3/nPrtP7ePGZmhkachP5rTVw2jpjDh0y5vKYrMNRMHHdrrLwZk/h0lLL+sunjhW/tVOTA8aEbic2LuxGxKWxmjk8aMxDh00cv1Qzg8Kp//T0rjcn1Mq6bg8JQ2PqQttBEy9JhyhjOI9Dwhsfd/tIpHbDjo6e+GeiRvHOl5f0xkYTL5ef1/VELrIdrtooFfS9e6FZXQ2dtcfV50q7jttwUDJOfLSDGX/E6dOBOXWquAVKYtLhxNBOWCcGRE+F0nU+4ZWgm/Mt81BYG3GZ6ZBGvyQoYyIpgMS5+GzNDMnqUeJRsdd4ZTlau8Y05mQRY2ysZo4cdmOzyhA0ZUxIiC6GZhej0cxMO8Phy8urCE3MCNN3AwPuJl42a1ICrny5NAPz4IExCwuyANJrvBP09Iw8j+wish47Fpjz59365whXPlp6ndnZlmn5pWd/CisR0U2uCboiRdbA7IiCB0VRV163E+pw0q5y9unAnDghu8pMfVfcjl4jkEV/sMPgoixsXLlSE3UIwkWUT+PkycCcOSMTozQ6W3vnUf45omZPH/XsJfXRR44YO/GSfG4XgumG9dGC5zIp9PdkNRqzLVEbJO0v+r9eZTmimbaLyEEZgKIz98OHjM2WcLhzh7e4hzpM0fbR/0kzHPOUIn3gT3Yjule8p1IRpBGakETYy5d56yO2tkLz9tu8yawkwh4/HpizZ2WWpe6h3SC8FPT6emiXNEqQCJr7vySO6Ws8QVMGhTIpRZh0UA11MQr2Ay8tBz1m6Q2nKHb+XFBoWOcKhtpKfpSTArPrTgraDhcTVuqEEsvTr//1MkITdQf56MkpfmGEhEZZEg4kDirZky/lwB0JIrgdrpOVldCOgj7CezIVol8++hnmgv6dHWOazbaQuW2eKLBQiTI4z1IGR4Cv/tl66H4NDdL3XVsNzd27sihCkYzbDm7UnGu0zO5OO1vAFTRlUiijwmnjxIQ8xz4z3S6o+PiSdeU+I40kVLw4cZI38eJGzXgb6WfaqJAXWvB/6TLvERWxUZ1I72s/4d2tisGNeElwIy737+Pi2NwMzfIyQ9GUXmRmLLgdrhPyzuShfcXr00frwpV3VjCTNfPfd/Ol1GhB/0nGgn6KxrO0wTSmj/r0rhkdzb/Jz2Y6curLxUpCuqd536+KeB2hry+2zPZ2zqedAicCTjCj5Y3rLbO9tb993FFlnLHgf+xSze7yluCz3bCTQsmH7zcUAe16AwEXGFkL7nCeJA7uqEIL/qmNeeB2uCS8F7SPM9l4m7kC6cTmlffOw8i6F9wJ12xCceLO7dC+OORdd8L1953Q2o3FeT8LKl6v5YjDHcKTyGM7ho8F5hxzQX9atOO2Oc/IYDfEFshbx2k0eNXMKpJvLKswzUbLFi8k5BmqSSycBf23b6VHYu6ociWHdx+9ULOdTgK3XVXEe8tBRYt54cZZyvUeGuxeSOBGvyS7EQ2LlOngQAv+KcPSzRJx25fE7Iy/BRU1loOQTmTyFDC4gulmK24uhzYnzSFrFMn6fRa0cGpOOMGuAt5bDitoB/noboKgVBilxDhQhE7DHmvGbHNWh8r6fRaLCy27vc13vDl9tBuNerukzPG4nViPnPImZEkG8tdCzNZmaG4udT+xc3a6ZV78QP7VfhNTtLE3+RTHUyOBfUmg9siuUA28OX20G9uboVm63jIXBKvMxvcEnbTWghv9qDoYZqTHuRGaMizDw4HtLEmdUQoJ2u7j8xzeOFphuALpxBYwUjpEnixDHCuODBaa7T17ebH58pS0nNQ/E9J5SFXwPssRzW7ziCiLyHbEswl0g8aZXxURDd/dshIUwbmTMBJu0jWlgl5bCc3GPX9OGO12XxGhYyQJg6I254T+R4+Mmd9b0J8FN32XZH1swWdU9hi1RGdCdicqxN33QnNrTWYCk6xF2jCfxvzegv48cEeViwmLj6h9kskwMcvMi1cZNZaDhiGuQDqhxf5nnt5fwGD7Z8bm0uZsy+wyaiyUabk0vt92SO1GW9B+r9/YZxGr3Nu4SAVNdEZkWrjEgdMG2jhLi4E4PNG+HGXxbmysh2ZVeCREleA9rYrjYuiMR7wRWtDPyO/a5azME+/r15iCjgmYCj5kQyR0KwD5iIrCSsTKcmgjzlPHi5cIrsQKGNzhfGmxZR5st7MFeWlQiu/jef+6nXEhn0id5/JEze5SkUDvz2lv1ZF17wrSEB5hdZa+KWuvQ1CxhUORaEf/w9k4e3QoMKN7+XLuhDWJIm2uMl6ePtrtZEqOh03DCjk0/AlhVG1jnBq6tdEuk3Owvt62Txae7YJ+WqnIaG/V/1ZVloOGzgbTkyZBVoPKzNz87lzBbMEss83kowdqbcshgdaSU4Ena6eOT7+X3ZEKQlkDTkk5ifGpmhUNJ797ey007zGPzI3gjirUtgsXa/aUJAnWvytDnaBpXS/ldyU8O1Yzz7/AuzUS784V9IlTgfnQR2R2g3CRFaoa6ixHu8DCqFYkQN/f8tJHGetFyeoUtBvU3ru0cfYWr8r54Y/x2tcJdfz5vS+l98lSZLWVF4Y8wcVQevgw78NKOxE3SnPb18kNJQv6O1Ep6Ga9t7uXaY3yyhIvwnbCnRhKcdHpq4iqwkrEIyopN1tmbLw3/XWOct+0Y0bwhOesTRIee8RAW0ElojdPvA/0MgJx7UISN5dCs7khi/IcJJPYKgNBO8BV53F1nSxurYZmXXi2dlXx+vTRbsxdk2+czcPOI2Ouz7k5sZOKQi98UJ6Oy8Lajd4NBj1FbYSm4XuVeRZzETgL+rPoVYRuML+RyyfUCppoCPPReXBRao+4ztw4W5RedZx+oLKwEiXfXYotjaLrN5IKBLSuglKOZbK5Hpq1ZR0bYpPuofIIXa44aNlnsy6rSnZS9qhiU4yKUS3oO2uhuVtwwVAelhZa5v52nr/MT9mjima7QagsrMQhS/D+l8rJHFC0kxRTkljY2zgr3YmSRlPZDpVOVEdoosyIR53FNVTlpMlhGZR57aqgX9AliC6iDEGX2Qnnmccm+IjqLAfZgZWEb6JyAS3ov3ennGwBFYXKwGVGJmsZZ79+r+L00W7YTMRMy7zvRbc+2oqupGob+Vzp8cBJzFFBpaQ2VwX1lqOsIbwsu0HY5ag33EbpaEG/dtRnOYhmCUN4c+8L3suCJrPncn4/YR6WF1vm4X3ZElcfCF77csdXnQLgMQfCcoCDw4GwHODggAgNVAFBA1XAcgBVIEIDVaivFIKDBSwHUAUsB1AFBA1UAcsBVIEIDVQBQQNVwHIAVSBCA1VA0EAVak8fBQcTRGigCggaqAJZDqAKRGigCggaqAKWA6ii9sM/DLs+ERaAvgHLAVRhvwEdIRpowQpa+4mU4OBgLccP/ggfDfyHdNyO0LAdQAmYFAJVPBb092E7gMdE+n1sOWA7gAZgOYAq9gn6e7AdwEPiut1nOWA7gO88YTmuIkoDj+jUa2rV+8dfwpcJgWpz9U9PFgSfsBwRWN8BfCQ1y/HdBPUDUBXS9JkqaAKiBlWkmy5TLQesB/CRrhGa+A6sB6gQWXrMFDREDapClpgJVjLjp0jlgT7x7ZxOIVeEjsh7UQBcwtEdS9AE5+IASOHqjWU54vzsi6gkgnJ57c/8rYHsCB1R5M0AyEtRfRWO0IjWoAyKCjnCiaCJn8OCACGvFrAYnTgTdASEDbi4EHJEYQ+dhsvGAf241ovzCB3nF7AhIIVvObAXSZQqaIgbxClLxHF6JmiI+2DSCxHH+R9XdHAxtd9EpgAAAABJRU5ErkJggg==">
+</head>
+<body>
+  <div id="app" class="container">
+    <div class="hero"><p class="dim">Загрузка приложения…</p></div>
+  </div>
+  <noscript><p style="padding:20px;text-align:center">Для работы приложения необходимо включить JavaScript.</p></noscript>
+  <script>
+    // Если приложение не запустилось — показываем причину вместо пустого экрана.
+    (function () {
+      var shown = false, lastErr = '';
+      function fail(extra) {
+        if (shown) return; shown = true;
+        var a = document.getElementById('app');
+        a.innerHTML = '<div class="card" style="margin-top:40px"><h2>Не удалось запустить приложение</h2>' +
+          '<p class="muted" style="margin:10px 0">' + (extra || '') + '</p>' +
+          (lastErr ? '<p class="dim" style="word-break:break-word">Ошибка: ' + lastErr + '</p>' : '') +
+          '<p class="muted" style="margin:10px 0">Что можно сделать: обновите страницу; убедитесь, что iOS не старше 14; ' +
+          'не используйте режим «Без истории».</p>' +
+          '<button class="btn btn-primary" onclick="location.reload()">Обновить</button></div>';
+      }
+      window.addEventListener('error', function (e) {
+        lastErr = String((e && (e.message || (e.target && e.target.src))) || 'неизвестно');
+        setTimeout(function () { fail('Один из файлов приложения не загрузился или завершился ошибкой.'); }, 400);
+      }, true);
+      window.addEventListener('unhandledrejection', function (e) { lastErr = String(e && e.reason); });
+      setTimeout(function () {
+        var a = document.getElementById('app');
+        if (a && a.textContent.indexOf('Загрузка приложения') !== -1) fail('Приложение не ответило за 8 секунд.');
+      }, 8000);
+    })();
+  </script>
+  <script>
+var __M = {};
+__M.db = (function(){
+// db.js — слой хранения поверх IndexedDB.
+// Единый адаптер для Windows (Chrome/Edge) и iPhone (Safari PWA).
+// Архитектурно изолирован: при появлении серверного режима (SQLite)
+// достаточно заменить реализацию этих функций, не трогая остальной код.
+
+const DB_NAME = 'webstudio_questionnaire';
+const DB_VERSION = 1;
+
+let _db = null;
+
+function openDB() {
+  if (_db) return Promise.resolve(_db);
+  return new Promise((resolve, reject) => {
+    const req = indexedDB.open(DB_NAME, DB_VERSION);
+    req.onupgradeneeded = (e) => {
+      const db = e.target.result;
+      if (!db.objectStoreNames.contains('questionnaires')) {
+        const s = db.createObjectStore('questionnaires', { keyPath: 'id' });
+        s.createIndex('status', 'status');
+        s.createIndex('updated_at', 'updated_at');
+      }
+      if (!db.objectStoreNames.contains('files')) {
+        const f = db.createObjectStore('files', { keyPath: 'id' });
+        f.createIndex('qid', 'qid');
+      }
+      if (!db.objectStoreNames.contains('settings')) {
+        db.createObjectStore('settings', { keyPath: 'key' });
+      }
+    };
+    req.onsuccess = () => { _db = req.result; resolve(_db); };
+    req.onerror = () => reject(req.error || new Error('Не удалось открыть базу данных'));
+  });
+}
+
+function tx(store, mode, fn) {
+  return openDB().then(db => new Promise((resolve, reject) => {
+    const t = db.transaction(store, mode);
+    const s = t.objectStore(store);
+    let result;
+    try { result = fn(s); } catch (err) { reject(err); return; }
+    t.oncomplete = () => resolve(result && 'result' in result ? result.result : result);
+    t.onerror = () => reject(t.error || new Error('Ошибка записи в базу'));
+    t.onabort = () => reject(t.error || new Error('Транзакция прервана'));
+  }));
+}
+
+function reqToPromise(storeName, mode, make) {
+  return openDB().then(db => new Promise((resolve, reject) => {
+    const t = db.transaction(storeName, mode);
+    const r = make(t.objectStore(storeName));
+    r.onsuccess = () => resolve(r.result);
+    r.onerror = () => reject(r.error);
+  }));
+}
+
+// ---- Анкеты ----
+const putQuestionnaire = q => tx('questionnaires', 'readwrite', s => s.put(q));
+const getQuestionnaire = id => reqToPromise('questionnaires', 'readonly', s => s.get(id));
+const getAllQuestionnaires = () => reqToPromise('questionnaires', 'readonly', s => s.getAll());
+const deleteQuestionnaire = async (id) => {
+  const files = await getFilesByQ(id);
+  for (const f of files) await deleteFile(f.id);
+  return tx('questionnaires', 'readwrite', s => s.delete(id));
+};
+
+// ---- Файлы ----
+const putFile = f => tx('files', 'readwrite', s => s.put(f));
+const getFile = id => reqToPromise('files', 'readonly', s => s.get(id));
+const deleteFile = id => tx('files', 'readwrite', s => s.delete(id));
+const getFilesByQ = qid => reqToPromise('files', 'readonly', s => s.index('qid').getAll(qid));
+const getAllFiles = () => reqToPromise('files', 'readonly', s => s.getAll());
+
+// ---- Настройки (админ, тема, текст согласия…) ----
+const getSetting = async (key) => {
+  const r = await reqToPromise('settings', 'readonly', s => s.get(key));
+  return r ? r.value : null;
+};
+const setSetting = (key, value) => tx('settings', 'readwrite', s => s.put({ key, value }));
+
+// ---- Запрос постоянного хранилища (важно для iOS: защита от очистки) ----
+async function requestPersistence() {
+  try {
+    if (navigator.storage?.persist) {
+      const persisted = await navigator.storage.persisted();
+      if (!persisted) await navigator.storage.persist();
+    }
+  } catch (_) { /* не критично */ }
+}
+
+// ---- Полная очистка (используется только при восстановлении из копии) ----
+async function clearAllData() {
+  await tx('questionnaires', 'readwrite', s => s.clear());
+  await tx('files', 'readwrite', s => s.clear());
+}
+
+return { openDB, putQuestionnaire, getQuestionnaire, getAllQuestionnaires, deleteQuestionnaire, putFile, getFile, deleteFile, getFilesByQ, getAllFiles, getSetting, setSetting, requestPersistence, clearAllData };
+})();
+__M.schema = (function(){
+// schema.js — полная схема опроса: 8 общих этапов + специальные ветки для 9 типов сайтов.
+// Чистые данные + декларативные условия видимости (исполняются в logic.js).
+
+const SCHEMA_VERSION = 1;
+
+const SITE_TYPES = [
+  { id: 'card',      label: 'Сайт-визитка',             icon: '🪪' },
+  { id: 'landing',   label: 'Лендинг',                  icon: '🎯' },
+  { id: 'corporate', label: 'Корпоративный сайт',       icon: '🏢' },
+  { id: 'catalog',   label: 'Каталог товаров или услуг', icon: '🗂️' },
+  { id: 'shop',      label: 'Интернет-магазин',         icon: '🛒' },
+  { id: 'booking',   label: 'Сайт с онлайн-записью',    icon: '📅' },
+  { id: 'portfolio', label: 'Портфолио',                icon: '🖼️' },
+  { id: 'redesign',  label: 'Редизайн существующего сайта', icon: '♻️' },
+  { id: 'other',     label: 'Другое',                   icon: '✨' },
+];
+
+const STATUSES = [
+  { id: 'draft',     label: 'Черновик',   color: 'gray' },
+  { id: 'progress',  label: 'В процессе', color: 'blue' },
+  { id: 'completed', label: 'Завершена',  color: 'green' },
+  { id: 'sent',      label: 'Отправлена', color: 'violet' },
+  { id: 'archived',  label: 'В архиве',   color: 'dim' },
+];
+
+const SCALES = {
+  P: [ // приоритет
+    { id: 'must', label: 'Обязательно' },
+    { id: 'want', label: 'Желательно' },
+    { id: 'no',   label: 'Не требуется' },
+    { id: 'dk',   label: 'Пока не знаю' },
+  ],
+  A: [ // готовность материалов
+    { id: 'ready', label: 'Полностью готово' },
+    { id: 'part',  label: 'Частично готово' },
+    { id: 'none',  label: 'Отсутствует' },
+    { id: 'help',  label: 'Нужна помощь с подготовкой' },
+  ],
+};
+
+const t  = (id, label, extra = {}) => ({ id, type: 'text', label, ...extra });
+const ta = (id, label, extra = {}) => ({ id, type: 'textarea', label, ...extra });
+const sel = (id, label, options, extra = {}) => ({ id, type: 'select', label, options, ...extra });
+const mul = (id, label, options, extra = {}) => ({ id, type: 'multi', label, options, ...extra });
+const mx  = (id, label, rows, scale = 'P', extra = {}) => ({ id, type: 'matrix', label, rows, scale, ...extra });
+const files = (id, label, extra = {}) => ({ id, type: 'files', label, ...extra });
+const O = arr => arr.map(x => Array.isArray(x) ? { id: x[0], label: x[1] } : { id: x, label: x });
+
+// Условие: в выбранной функции (матрице) строка отмечена как must/want
+const fsel = (qid, row) => ({ matrix: qid, row, in: ['must', 'want'] });
+
+const STAGES = [
+  // ───────────────────────── Этап 0. Тип сайта ─────────────────────────
+  {
+    id: 'type', title: 'Тип сайта', icon: '🧭',
+    desc: 'Выберите, какой сайт вам нужен — от этого зависит набор вопросов.',
+    questions: [
+      { id: 'site_type', type: 'typecards', label: 'Основной тип будущего сайта', required: true,
+        hint: 'Выберите один вариант, который лучше всего описывает задачу.' },
+      { id: 'site_type_extra', type: 'multi', label: 'Дополнительные направления',
+        options: 'SITE_TYPES_EXTRA',
+        hint: 'Если нужно комбинированное решение — отметьте дополнительные направления. Необязательно.' },
+      ta('site_type_other', 'Опишите своими словами, какой сайт нужен', {
+        showIf: { any: [{ q: 'site_type', has: 'other' }, { q: 'site_type_extra', has: 'other' }] },
+        required: true,
+        hint: 'Назначение, структура, необходимые функции, примеры похожих сайтов, особые требования.' }),
+    ],
+  },
+
+  // ───────────────────────── Этап 1. О компании ─────────────────────────
+  {
+    id: 'company', title: 'О компании', icon: '🏷️',
+    desc: 'Расскажите о вашем бизнесе — это основа будущего сайта.',
+    questions: [
+      t('company_name', 'Название компании', { required: true, example: 'ООО «Ромашка», ИП Иванов' }),
+      t('brand_name', 'Название бренда (если отличается)'),
+      t('industry', 'Сфера деятельности', { example: 'Ремонт квартир, стоматология, грузоперевозки' }),
+      ta('business_desc', 'Подробное описание бизнеса', {
+        hint: 'Чем занимаетесь, как давно, что делает вас особенными. Пишите свободно — чем подробнее, тем лучше.' }),
+      t('city', 'Город'),
+      t('region', 'Регион'),
+      t('work_area', 'Территория работы', { example: 'Город, область, вся Россия, СНГ' }),
+      t('founded_year', 'Год основания'),
+      t('experience', 'Опыт работы', { example: '8 лет, с 2016 года' }),
+      sel('employees', 'Количество сотрудников',
+        O([['1', 'Работаю один'], ['2-5', '2–5'], ['6-15', '6–15'], ['16-50', '16–50'], ['50+', 'Более 50']])),
+      ta('main_directions', 'Основные направления деятельности'),
+      ta('products_services', 'Основные товары и услуги', {
+        hint: 'Перечислите главное, что вы продаёте или делаете.' }),
+      ta('target_audience', 'Целевая аудитория', {
+        example: 'Семьи с детьми 30–45 лет; владельцы малого бизнеса; строительные компании' }),
+      ta('main_clients', 'Основные клиенты', { hint: 'Частные лица, компании, госзаказ — кто покупает чаще всего?' }),
+      t('clients_geo', 'География клиентов'),
+      ta('advantages', 'Преимущества перед конкурентами', {
+        hint: 'Почему выбирают вас? Цена, скорость, качество, гарантии, опыт…' }),
+      ta('company_features', 'Главные особенности компании'),
+      t('current_site', 'Существующий сайт (адрес)', { example: 'https://example.ru' }),
+      ta('socials', 'Социальные сети', { hint: 'Ссылки или названия аккаунтов: ВКонтакте, Telegram-канал и т. д.' }),
+      ta('messengers', 'Мессенджеры для связи с клиентами', { example: 'WhatsApp, Telegram, MAX' }),
+      ta('competitors', 'Основные конкуренты'),
+      ta('competitor_sites', 'Примеры сайтов конкурентов', { hint: 'Ссылки, если знаете.' }),
+      ta('free_about', 'Что ещё важно знать о вашем бизнесе?', {
+        hint: 'Любая информация в свободной форме.' }),
+    ],
+  },
+
+  // ───────────────────────── Этап 2. Цели и задачи ─────────────────────────
+  {
+    id: 'goals', title: 'Цели сайта', icon: '🎯',
+    desc: 'Зачем вам сайт и какой результат будет успехом.',
+    questions: [
+      mul('goals', 'Какие цели должен решать сайт?', O([
+        ['new_clients', 'Привлечение новых клиентов'],
+        ['leads', 'Получение заявок'],
+        ['sales', 'Увеличение продаж'],
+        ['online_sales', 'Онлайн-продажи'],
+        ['present_company', 'Презентация компании'],
+        ['present_products', 'Презентация товаров и услуг'],
+        ['booking', 'Онлайн-запись'],
+        ['portfolio', 'Демонстрация портфолио'],
+        ['trust', 'Повышение доверия'],
+        ['automation', 'Автоматизация работы'],
+        ['inform', 'Информирование клиентов'],
+        ['geo_expand', 'Расширение географии продаж'],
+      ]), { other: true, hint: 'Можно выбрать несколько.' }),
+      ta('clients_now', 'Как сейчас приходят клиенты?', { example: 'Сарафанное радио, Авито, соцсети, реклама' }),
+      ta('order_flow', 'Как клиент оформляет заказ и как происходит продажа?'),
+      ta('problems_now', 'Какие проблемы есть сейчас?'),
+      ta('expected_change', 'Что должно измениться после запуска сайта?'),
+      ta('success_criteria', 'Какой результат вы будете считать успешным?', {
+        example: '10 заявок в неделю; продажи через сайт; солидный вид для партнёров' }),
+      ta('kpi', 'Какие показатели для вас важны?', { example: 'Заявки, звонки, продажи, посещаемость' }),
+      sel('urgency', 'Насколько срочно нужен сайт?', O([
+        ['asap', 'Очень срочно — горит'],
+        ['normal', 'В обычном рабочем темпе'],
+        ['flex', 'Не срочно, важнее качество'],
+      ])),
+    ],
+  },
+
+  // ───────────────────────── Этап 3. Структура ─────────────────────────
+  {
+    id: 'structure', title: 'Структура сайта', icon: '🗺️',
+    desc: 'Отметьте, какие страницы и разделы нужны.',
+    questions: [
+      mx('sections', 'Страницы и разделы будущего сайта', O([
+        ['home', 'Главная'], ['about', 'О компании'], ['services', 'Услуги'],
+        ['catalog', 'Каталог'], ['categories', 'Категории товаров'], ['product_cards', 'Карточки товаров'],
+        ['prices', 'Цены'], ['portfolio', 'Портфолио'], ['cases', 'Кейсы'], ['reviews', 'Отзывы'],
+        ['news', 'Новости'], ['articles', 'Статьи'], ['blog', 'Блог'], ['faq', 'FAQ'],
+        ['contacts', 'Контакты'], ['delivery', 'Доставка'], ['payment', 'Оплата'], ['promo', 'Акции'],
+        ['team', 'Команда'], ['jobs', 'Вакансии'], ['docs', 'Документы'], ['account', 'Личный кабинет'],
+      ]), 'P', { hint: 'Для каждого раздела выберите, насколько он нужен.' }),
+      ta('sections_other', 'Другие разделы, которых нет в списке'),
+      t('pages_count', 'Сколько примерно страниц потребуется?', { example: '5–7, около 20, пока не знаю' }),
+      sel('service_pages', 'Нужны ли отдельные страницы для каждой услуги?', O([
+        ['yes', 'Да'], ['no', 'Нет'], ['dk', 'Пока не знаю']])),
+      mx('structure_opts', 'Дополнительные возможности', O([
+        ['categories', 'Категории'], ['filters', 'Фильтры'], ['search', 'Поиск'],
+        ['account', 'Личный кабинет'], ['admin', 'Административная панель'],
+      ])),
+      sel('who_updates', 'Кто будет обновлять информацию на сайте?', O([
+        ['self', 'Я или мои сотрудники'], ['studio', 'Разработчик / студия'],
+        ['both', 'И мы, и разработчик'], ['dk', 'Пока не знаю']])),
+    ],
+  },
+
+  // ───────────────────────── Этап 4. Дизайн ─────────────────────────
+  {
+    id: 'design', title: 'Дизайн', icon: '🎨',
+    desc: 'Каким сайт должен быть визуально.',
+    questions: [
+      mul('style', 'Предпочитаемый стиль', O([
+        ['minimal', 'Минималистичный'], ['modern', 'Современный'], ['business', 'Строгий деловой'],
+        ['premium', 'Премиальный'], ['bright', 'Яркий'], ['tech', 'Технологичный'],
+        ['creative', 'Креативный'], ['classic', 'Классический'],
+      ]), { other: true }),
+      t('color_primary', 'Основной цвет', { example: 'Синий, #1E64D4, как логотип' }),
+      t('color_secondary', 'Дополнительный цвет'),
+      t('color_accent', 'Цвет акцентов'),
+      t('colors_avoid', 'Нежелательные цвета'),
+      sel('theme_pref', 'Светлая или тёмная тема сайта?', O([
+        ['light', 'Светлая'], ['dark', 'Тёмная'], ['both', 'Обе / переключение'], ['dk', 'На усмотрение дизайнера']])),
+      sel('has_logo', 'Есть ли логотип?', O([
+        ['yes', 'Да, есть'], ['old', 'Есть, но нужно обновить'], ['no', 'Нет, нужно создать'], ['no_need', 'Не нужен']])),
+      sel('has_brand', 'Есть ли фирменный стиль?', O([['yes', 'Да'], ['part', 'Частично'], ['no', 'Нет']])),
+      sel('has_brandbook', 'Есть ли брендбук?', O([['yes', 'Да'], ['no', 'Нет']])),
+      ta('sites_like', 'Какие сайты нравятся?', { hint: 'Ссылки на 2–3 сайта — любых, не обязательно по вашей теме.' }),
+      ta('sites_dislike', 'Какие сайты не нравятся?'),
+      ta('like_what', 'Что именно нравится в примерах?', { example: 'Цвета, крупные фото, простота, анимации' }),
+      mx('design_opts', 'Дополнительные элементы дизайна', O([
+        ['animations', 'Анимации'], ['video', 'Видео'], ['illustrations', 'Иллюстрации'],
+        ['custom_graphics', 'Индивидуальная графика'],
+      ])),
+      ta('photos_usage', 'Какие фотографии должны использоваться?', {
+        example: 'Наши реальные фото; фотостоки; нужна фотосъёмка' }),
+      ta('design_refs', 'Ссылки на референсы', { hint: 'Примеры дизайна, которые можно взять за ориентир.' }),
+      files('design_files', 'Прикрепите материалы по дизайну', {
+        hint: 'Логотип, брендбук, примеры — JPG, PNG, PDF и др.' }),
+    ],
+  },
+
+  // ───────────────────────── Этап 5. Функциональность ─────────────────────────
+  {
+    id: 'features', title: 'Функции', icon: '⚙️',
+    desc: 'Что сайт должен уметь.',
+    questions: [
+      mx('features', 'Функции сайта', O([
+        ['forms', 'Формы обратной связи'], ['leads', 'Заявки'], ['callback', 'Обратный звонок'],
+        ['msg_buttons', 'Кнопки мессенджеров'], ['whatsapp', 'WhatsApp'], ['telegram', 'Telegram'],
+        ['chat', 'Онлайн-чат'], ['map', 'Карта'], ['search', 'Поиск по сайту'], ['filters', 'Фильтры'],
+        ['gallery', 'Галерея'], ['video', 'Видео'], ['reviews', 'Отзывы'], ['newsletter', 'Рассылка'],
+        ['multilang', 'Мультиязычность'], ['admin', 'Административная панель'], ['cms', 'Управление контентом'],
+        ['seo', 'SEO'], ['metrika', 'Яндекс Метрика'], ['analytics', 'Другие системы аналитики'],
+        ['crm', 'CRM-интеграция'], ['integrations', 'Интеграция с внешними сервисами'],
+        ['notifications', 'Уведомления'], ['account', 'Личный кабинет'],
+      ])),
+      t('crm_name', 'Какая CRM-система используется или планируется?', {
+        showIf: fsel('features', 'crm'), example: 'Битрикс24, amoCRM, своя система' }),
+      ta('crm_data', 'Какие данные передавать в CRM?', {
+        showIf: fsel('features', 'crm'), example: 'Заявки с форм, заказы, контакты клиентов' }),
+      t('langs', 'Какие языки нужны?', { showIf: fsel('features', 'multilang'), example: 'Русский + английский' }),
+      t('analytics_which', 'Какие системы аналитики?', { showIf: fsel('features', 'analytics') }),
+      ta('integrations_which', 'С какими внешними сервисами нужна интеграция?', {
+        showIf: fsel('features', 'integrations'), example: '1С, МойСклад, сервис доставки, платёжная система' }),
+      ta('notifications_how', 'Какие уведомления и куда отправлять?', {
+        showIf: fsel('features', 'notifications'), example: 'Заявки — на почту и в Telegram' }),
+      ta('features_other', 'Другие функции, которых нет в списке'),
+    ],
+  },
+
+  // ───────────────────────── Этап 6. Контент ─────────────────────────
+  {
+    id: 'content', title: 'Контент', icon: '📦',
+    desc: 'Какие материалы уже готовы, а что нужно подготовить.',
+    questions: [
+      mx('materials', 'Материалы для сайта', O([
+        ['logo', 'Логотип'], ['brand', 'Фирменный стиль'], ['photos', 'Фотографии'], ['video', 'Видео'],
+        ['texts', 'Тексты'], ['company_desc', 'Описание компании'], ['services_desc', 'Описание услуг'],
+        ['catalog', 'Каталог товаров'], ['prices', 'Цены'], ['reviews', 'Отзывы'],
+        ['certs', 'Сертификаты'], ['docs', 'Документы'], ['contacts', 'Контактная информация'],
+      ]), 'A'),
+      ta('materials_other', 'Другая информация и материалы'),
+      ta('help_needed', 'С подготовкой каких материалов нужна помощь?', {
+        hint: 'Например: написать тексты, обработать фото, собрать отзывы.' }),
+      files('content_files', 'Загрузите готовые материалы', {
+        hint: 'Логотип, фото, прайс, тексты — JPG, PNG, PDF, DOCX, XLSX, TXT.' }),
+    ],
+  },
+
+  // ───────────────────────── Этап 7. Технические требования ─────────────────────────
+  {
+    id: 'tech', title: 'Технические вопросы', icon: '🔧',
+    desc: 'Домен, хостинг, интеграции и сопровождение.',
+    questions: [
+      sel('has_domain', 'Есть ли домен?', O([
+        ['yes', 'Да, есть'], ['no_need_reg', 'Нет, нужно зарегистрировать'], ['dk', 'Не знаю, что это']])),
+      t('domain_name', 'Какой домен?', { showIf: { q: 'has_domain', has: 'yes' }, example: 'example.ru' }),
+      sel('has_hosting', 'Есть ли хостинг?', O([
+        ['yes', 'Да, есть'], ['no_need_buy', 'Нет, нужно подобрать и приобрести'], ['dk', 'Не знаю, что это']])),
+      mx('tech_needs', 'Что потребуется?', O([
+        ['corp_mail', 'Корпоративная почта'], ['admin_panel', 'Административная панель'],
+        ['self_edit', 'Самостоятельное редактирование сайта'], ['crm', 'Интеграция с CRM'],
+        ['1c', 'Интеграция с 1С'], ['payments', 'Онлайн-платежи'], ['delivery', 'Доставка'],
+        ['messengers', 'Интеграция с мессенджерами'], ['analytics', 'Аналитика'],
+        ['seo_setup', 'Настройка SEO'], ['support', 'Техническая поддержка'],
+        ['maintenance', 'Дальнейшее обслуживание сайта'],
+      ])),
+      ta('payments_detail', 'Какие способы онлайн-оплаты нужны?', {
+        showIf: fsel('tech_needs', 'payments'), example: 'Карты, СБП, ЮKassa, рассрочка' }),
+      ta('1c_detail', 'Что должно синхронизироваться с 1С?', {
+        showIf: fsel('tech_needs', '1c'), example: 'Товары, остатки, цены, заказы' }),
+      ta('integration_details', 'Подробности по другим интеграциям', {
+        hint: 'Названия сервисов, какие данные передавать.' }),
+    ],
+  },
+
+  // ═══════════════════ СПЕЦИАЛЬНЫЕ ВЕТКИ ПО ТИПАМ САЙТОВ ═══════════════════
+  {
+    id: 'b_shop', title: 'Интернет-магазин', icon: '🛒', branch: 'shop',
+    desc: 'Подробности о вашем будущем магазине.',
+    showIf: { type: 'shop' },
+    questions: [
+      sel('shop_products_count', 'Сколько товаров будет в магазине?', O([
+        ['<50', 'До 50'], ['50-200', '50–200'], ['200-1000', '200–1000'], ['1000+', 'Более 1000'], ['dk', 'Пока не знаю']])),
+      t('shop_categories_count', 'Сколько примерно категорий?'),
+      mx('shop_features', 'Возможности магазина', O([
+        ['specs', 'Характеристики товаров'], ['variants', 'Варианты товаров (размер, цвет…)'],
+        ['photos', 'Несколько фото у товара'], ['filters', 'Фильтры'], ['search', 'Поиск'],
+        ['cart', 'Корзина'], ['checkout', 'Оформление заказа'], ['online_pay', 'Онлайн-оплата'],
+        ['promo', 'Промокоды'], ['discounts', 'Скидки'], ['account', 'Личный кабинет'],
+        ['order_history', 'История заказов'], ['order_mgmt', 'Управление заказами'],
+        ['notify', 'Уведомления о заказах'], ['crm', 'Интеграция с CRM'],
+        ['stock_sync', 'Интеграция с учётными системами (1С, МойСклад…)'],
+        ['import_export', 'Импорт и экспорт товаров'],
+      ])),
+      ta('shop_payment_methods', 'Какие способы оплаты нужны?', {
+        showIf: fsel('shop_features', 'online_pay'), example: 'Карты, СБП, наличные при получении' }),
+      mx('shop_delivery', 'Доставка', O([
+        ['courier', 'Курьерская доставка'], ['post', 'Почта / транспортные компании'],
+        ['pvz', 'Пункты выдачи'], ['pickup', 'Самовывоз'],
+      ])),
+      ta('shop_products_source', 'Откуда возьмём данные о товарах?', {
+        example: 'Excel-файл, выгрузка из 1С, заполню вручную, есть на старом сайте' }),
+    ],
+  },
+  {
+    id: 'b_booking', title: 'Онлайн-запись', icon: '📅', branch: 'booking',
+    desc: 'Как должна работать запись клиентов.',
+    showIf: { type: 'booking' },
+    questions: [
+      ta('bk_services', 'Перечень услуг для записи', { hint: 'Название, стоимость и продолжительность каждой услуги.' }),
+      sel('bk_staff_count', 'Сколько специалистов ведут запись?', O([
+        ['1', 'Один'], ['2-5', '2–5'], ['6+', 'Больше пяти']])),
+      mx('bk_features', 'Возможности записи', O([
+        ['staff_profiles', 'Профили специалистов'], ['staff_choice', 'Выбор специалиста'],
+        ['date_choice', 'Выбор даты'], ['time_choice', 'Выбор времени'], ['calendar', 'Календарь'],
+        ['schedules', 'Рабочие графики специалистов'], ['notify', 'Уведомления о записи'],
+        ['confirm', 'Подтверждение записи'], ['cancel', 'Отмена записи'], ['reschedule', 'Перенос записи'],
+        ['prepay', 'Предоплата'], ['cal_sync', 'Интеграция с календарём'],
+        ['account', 'Личный кабинет клиента'], ['mgmt', 'Управление записями администратором'],
+      ])),
+      ta('bk_details', 'Особенности вашей записи', {
+        hint: 'Например: запись парами, ограничения по времени, групповые занятия.' }),
+    ],
+  },
+  {
+    id: 'b_catalog', title: 'Каталог', icon: '🗂️', branch: 'catalog',
+    desc: 'Подробности о каталоге товаров или услуг.',
+    showIf: { type: 'catalog' },
+    questions: [
+      t('ct_items_count', 'Сколько товаров или услуг будет в каталоге?'),
+      t('ct_categories_count', 'Сколько категорий?'),
+      mx('ct_features', 'Возможности каталога', O([
+        ['specs', 'Характеристики'], ['filters', 'Фильтры'], ['search', 'Поиск'],
+        ['cards', 'Подробные карточки'], ['photos', 'Фотографии'], ['prices', 'Цены'],
+        ['price_request', 'Запрос цены'], ['leads', 'Заявки из каталога'],
+        ['export', 'Выгрузка каталога'], ['self_edit', 'Самостоятельное редактирование'],
+      ])),
+      ta('ct_source', 'Откуда возьмём данные каталога?', { example: 'Excel, 1С, старый сайт, заполню вручную' }),
+    ],
+  },
+  {
+    id: 'b_portfolio', title: 'Портфолио', icon: '🖼️', branch: 'portfolio',
+    desc: 'Как показать ваши работы.',
+    showIf: { type: 'portfolio' },
+    questions: [
+      t('pf_works_count', 'Сколько работ покажем на старте?'),
+      ta('pf_categories', 'Категории работ', { example: 'Кухни, шкафы, гостиные; или: свадьбы, портреты' }),
+      mx('pf_features', 'Возможности портфолио', O([
+        ['descriptions', 'Описание проектов'], ['cases', 'Развёрнутые кейсы'], ['photos', 'Фотографии'],
+        ['before_after', 'Фото «до и после»'], ['video', 'Видео'], ['reviews', 'Отзывы к работам'],
+        ['filters', 'Фильтры по категориям'], ['self_add', 'Самостоятельное добавление новых работ'],
+      ])),
+    ],
+  },
+  {
+    id: 'b_redesign', title: 'Редизайн', icon: '♻️', branch: 'redesign',
+    desc: 'Что происходит с текущим сайтом и что должно измениться.',
+    showIf: { type: 'redesign' },
+    questions: [
+      t('rd_url', 'Адрес существующего сайта', { required: true, example: 'https://example.ru' }),
+      ta('rd_dislikes', 'Что не устраивает в текущем сайте?'),
+      ta('rd_problems', 'Какие проблемы существуют?', { example: 'Мало заявок, устарел, неудобен с телефона' }),
+      ta('rd_keep', 'Что необходимо сохранить?'),
+      ta('rd_change', 'Что необходимо изменить?'),
+      sel('rd_new_structure', 'Нужна ли новая структура?', O([['yes', 'Да'], ['no', 'Нет'], ['dk', 'Пока не знаю']])),
+      sel('rd_new_design', 'Нужен ли полностью новый дизайн?', O([
+        ['full', 'Да, полностью новый'], ['refresh', 'Освежить текущий'], ['dk', 'Пока не знаю']])),
+      ta('rd_add_features', 'Какие функции добавить?'),
+      ta('rd_remove_features', 'Какие функции удалить?'),
+      sel('rd_move_content', 'Нужно ли переносить контент со старого сайта?', O([
+        ['all', 'Да, весь'], ['part', 'Частично'], ['no', 'Нет'], ['dk', 'Пока не знаю']])),
+      mx('rd_access', 'Доступы и ограничения', O([
+        ['sources', 'Есть доступ к исходникам'], ['cms', 'Есть CMS'],
+        ['keep_urls', 'Нужно сохранить адреса страниц (URL)'], ['keep_seo', 'Нужно сохранить SEO-позиции'],
+        ['domain_access', 'Есть доступ к домену и хостингу'],
+      ]), 'P', { scaleLabels: { must: 'Да', want: 'Частично', no: 'Нет', dk: 'Не знаю' } }),
+    ],
+  },
+  {
+    id: 'b_card', title: 'Сайт-визитка', icon: '🪪', branch: 'card',
+    desc: 'Что разместим на визитке.',
+    showIf: { type: 'card' },
+    questions: [
+      mx('cd_blocks', 'Блоки сайта-визитки', O([
+        ['about', 'Информация о компании'], ['contacts', 'Контакты'], ['services', 'Услуги'],
+        ['advantages', 'Преимущества'], ['reviews', 'Отзывы'], ['map', 'Карта'],
+        ['photos', 'Фотографии'], ['team', 'Команда'], ['forms', 'Формы заявок'],
+      ])),
+      ta('cd_notes', 'Пожелания к сайту-визитке'),
+    ],
+  },
+  {
+    id: 'b_landing', title: 'Лендинг', icon: '🎯', branch: 'landing',
+    desc: 'Что продвигаем и кого убеждаем.',
+    showIf: { type: 'landing' },
+    questions: [
+      ta('ld_product', 'Какой продукт или услуга продвигается?', { required: true }),
+      ta('ld_offer', 'Основное предложение (оффер)', { example: 'Кухня под ключ за 30 дней с гарантией 5 лет' }),
+      ta('ld_audience', 'Целевая аудитория лендинга'),
+      ta('ld_advantages', 'Главные преимущества'),
+      ta('ld_pains', 'Какие проблемы клиентов решает продукт?'),
+      mx('ld_blocks', 'Блоки лендинга', O([
+        ['reviews', 'Отзывы'], ['cases', 'Кейсы'], ['tariffs', 'Тарифы'], ['promo', 'Акции'],
+        ['forms', 'Формы заявок'], ['quiz', 'Квиз / калькулятор'],
+      ])),
+      ta('ld_traffic', 'Источники трафика', { example: 'Яндекс Директ, таргет ВКонтакте, Авито' }),
+      ta('ld_ads', 'Рекламные интеграции', { example: 'Метрика с целями, пиксели, коллтрекинг' }),
+    ],
+  },
+  {
+    id: 'b_corporate', title: 'Корпоративный сайт', icon: '🏢', branch: 'corporate',
+    desc: 'Структура и наполнение корпоративного сайта.',
+    showIf: { type: 'corporate' },
+    questions: [
+      ta('cp_directions', 'Направления деятельности и услуги'),
+      ta('cp_structure', 'Структура компании, отделы', { hint: 'Если нужно показать на сайте.' }),
+      mx('cp_blocks', 'Разделы корпоративного сайта', O([
+        ['staff', 'Сотрудники'], ['news', 'Новости'], ['blog', 'Блог'], ['docs', 'Документы'],
+        ['jobs', 'Вакансии'], ['forms', 'Формы заявок'], ['crm', 'CRM'], ['langs', 'Языковые версии'],
+      ])),
+      ta('cp_notes', 'Особые требования к корпоративному сайту'),
+    ],
+  },
+  {
+    id: 'b_other', title: 'Ваш проект', icon: '✨', branch: 'other',
+    desc: 'Расскажите подробнее о вашей идее.',
+    showIf: { type: 'other' },
+    questions: [
+      ta('ot_idea', 'Идея сайта и его назначение', { required: true }),
+      ta('ot_structure', 'Какая структура видится?'),
+      ta('ot_functions', 'Необходимые функции'),
+      ta('ot_refs', 'Референсы и похожие проекты'),
+      ta('ot_special', 'Особые требования'),
+    ],
+  },
+
+  // ───────────────────────── Этап 8. Бюджет и контакты ─────────────────────────
+  {
+    id: 'final', title: 'Бюджет и контакты', icon: '🤝',
+    desc: 'Последний шаг — бюджет, сроки и как с вами связаться.',
+    questions: [
+      sel('budget', 'Бюджет проекта', O([
+        ['<10', 'До 10 000 ₽'], ['10-20', '10 000–20 000 ₽'], ['20-35', '20 000–35 000 ₽'],
+        ['35-50', '35 000–50 000 ₽'], ['50-100', '50 000–100 000 ₽'], ['100+', 'Более 100 000 ₽'],
+        ['tbd', 'Пока не определён'], ['offer', 'Хочу получить предложение'],
+      ])),
+      sel('deadline', 'Сроки', O([
+        ['asap', 'Как можно скорее'], ['week', 'В течение недели'], ['2weeks', 'В течение двух недель'],
+        ['month', 'В течение месяца'], ['2months', 'В течение двух месяцев'], ['tbd', 'Срок не определён'],
+      ])),
+      t('contact_name', 'Ваше имя', { required: true }),
+      t('contact_company', 'Название компании'),
+      t('contact_phone', 'Телефон', { required: true, inputmode: 'tel', example: '+7 900 000-00-00' }),
+      t('contact_telegram', 'Telegram', { example: '@username' }),
+      t('contact_email', 'Email', { inputmode: 'email' }),
+      sel('contact_pref', 'Предпочитаемый способ связи', O([
+        ['phone', 'Звонок'], ['whatsapp', 'WhatsApp'], ['telegram', 'Telegram'], ['email', 'Email'],
+      ]), { other: true }),
+      t('contact_time', 'Удобное время для связи', { example: 'Будни после 15:00' }),
+      ta('comments', 'Комментарии и особые пожелания'),
+      ta('extra_requirements', 'Дополнительные требования'),
+      ta('dev_should_know', 'Что ещё важно знать разработчику?'),
+      { id: 'consent', type: 'consent', label: 'Согласие на обработку данных', required: true },
+    ],
+  },
+];
+
+// Текст согласия по умолчанию (редактируется в админ-панели; не является юридическим документом)
+const DEFAULT_CONSENT_TEXT =
+  'Я соглашаюсь с тем, что указанные в анкете сведения и приложенные файлы будут ' +
+  'использованы исполнителем для подготовки предложения и разработки сайта. ' +
+  'Данные хранятся локально у исполнителя и не передаются третьим лицам без моего согласия.';
+
+function getSiteType(id) { return SITE_TYPES.find(t => t.id === id); }
+function getStatus(id) { return STATUSES.find(s => s.id === id) || STATUSES[0]; }
+
+return { SCHEMA_VERSION, SITE_TYPES, STATUSES, SCALES, STAGES, DEFAULT_CONSENT_TEXT, getSiteType, getStatus };
+})();
+__M.util = (function(){
+// util.js — общие помощники (работает в браузере и в Node для тестов)
+function uuid() {
+  if (globalThis.crypto?.randomUUID) return crypto.randomUUID();
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => {
+    const r = Math.random() * 16 | 0, v = c === 'x' ? r : (r & 0x3 | 0x8);
+    return v.toString(16);
+  });
+}
+
+function nowISO() { return new Date().toISOString(); }
+
+function esc(s) {
+  return String(s ?? '').replace(/[&<>"']/g, m => ({
+    '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+  }[m]));
+}
+
+function fmtDate(iso, withTime = true) {
+  if (!iso) return '—';
+  const d = new Date(iso);
+  if (isNaN(d)) return '—';
+  const dd = String(d.getDate()).padStart(2, '0');
+  const mm = String(d.getMonth() + 1).padStart(2, '0');
+  const yy = d.getFullYear();
+  if (!withTime) return `${dd}.${mm}.${yy}`;
+  const hh = String(d.getHours()).padStart(2, '0');
+  const mi = String(d.getMinutes()).padStart(2, '0');
+  return `${dd}.${mm}.${yy} ${hh}:${mi}`;
+}
+
+function fmtSize(bytes) {
+  if (bytes == null) return '—';
+  if (bytes < 1024) return bytes + ' Б';
+  if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' КБ';
+  return (bytes / 1024 / 1024).toFixed(1) + ' МБ';
+}
+
+function debounce(fn, ms) {
+  let t;
+  return (...args) => { clearTimeout(t); t = setTimeout(() => fn(...args), ms); };
+}
+
+function downloadBlob(blob, filename) {
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 2000);
+}
+
+// ---- Криптография паролей (WebCrypto, PBKDF2-SHA256) ----
+const te = () => new TextEncoder();
+
+// SHA-256 / PBKDF2-HMAC-SHA256 на чистом JS. Нужен, потому что Safari на iPhone при открытии
+// по http:// (локальная сеть) отключает crypto.subtle. Результат идентичен WebCrypto.
+const K256 = new Uint32Array([
+  0x428a2f98,0x71374491,0xb5c0fbcf,0xe9b5dba5,0x3956c25b,0x59f111f1,0x923f82a4,0xab1c5ed5,
+  0xd807aa98,0x12835b01,0x243185be,0x550c7dc3,0x72be5d74,0x80deb1fe,0x9bdc06a7,0xc19bf174,
+  0xe49b69c1,0xefbe4786,0x0fc19dc6,0x240ca1cc,0x2de92c6f,0x4a7484aa,0x5cb0a9dc,0x76f988da,
+  0x983e5152,0xa831c66d,0xb00327c8,0xbf597fc7,0xc6e00bf3,0xd5a79147,0x06ca6351,0x14292967,
+  0x27b70a85,0x2e1b2138,0x4d2c6dfc,0x53380d13,0x650a7354,0x766a0abb,0x81c2c92e,0x92722c85,
+  0xa2bfe8a1,0xa81a664b,0xc24b8b70,0xc76c51a3,0xd192e819,0xd6990624,0xf40e3585,0x106aa070,
+  0x19a4c116,0x1e376c08,0x2748774c,0x34b0bcb5,0x391c0cb3,0x4ed8aa4a,0x5b9cca4f,0x682e6ff3,
+  0x748f82ee,0x78a5636f,0x84c87814,0x8cc70208,0x90befffa,0xa4506ceb,0xbef9a3f7,0xc67178f2,
+]);
+const H256 = [0x6a09e667,0xbb67ae85,0x3c6ef372,0xa54ff53a,0x510e527f,0x9b05688c,0x1f83d9ab,0x5be0cd19];
+const _W = new Uint32Array(64);
+
+/** Один блок: state (8 слов) обновляется на месте; w — 16 слов блока. */
+function sha256Block(state, w) {
+  const W = _W;
+  for (let i = 0; i < 16; i++) W[i] = w[i];
+  for (let i = 16; i < 64; i++) {
+    const a = W[i - 15], b = W[i - 2];
+    const s0 = ((a >>> 7) | (a << 25)) ^ ((a >>> 18) | (a << 14)) ^ (a >>> 3);
+    const s1 = ((b >>> 17) | (b << 15)) ^ ((b >>> 19) | (b << 13)) ^ (b >>> 10);
+    W[i] = (W[i - 16] + s0 + W[i - 7] + s1) | 0;
+  }
+  let a = state[0], b = state[1], c = state[2], d = state[3], e = state[4], f = state[5], g = state[6], h = state[7];
+  for (let i = 0; i < 64; i++) {
+    const S1 = ((e >>> 6) | (e << 26)) ^ ((e >>> 11) | (e << 21)) ^ ((e >>> 25) | (e << 7));
+    const ch = (e & f) ^ (~e & g);
+    const t1 = (h + S1 + ch + K256[i] + W[i]) | 0;
+    const S0 = ((a >>> 2) | (a << 30)) ^ ((a >>> 13) | (a << 19)) ^ ((a >>> 22) | (a << 10));
+    const maj = (a & b) ^ (a & c) ^ (b & c);
+    const t2 = (S0 + maj) | 0;
+    h = g; g = f; f = e; e = (d + t1) | 0; d = c; c = b; b = a; a = (t1 + t2) | 0;
+  }
+  state[0] = (state[0] + a) | 0; state[1] = (state[1] + b) | 0; state[2] = (state[2] + c) | 0; state[3] = (state[3] + d) | 0;
+  state[4] = (state[4] + e) | 0; state[5] = (state[5] + f) | 0; state[6] = (state[6] + g) | 0; state[7] = (state[7] + h) | 0;
+}
+
+/** Продолжить хеш с состояния state; prefixBytes — сколько байт уже обработано до него. Возвращает 8 слов. */
+function sha256From(state0, msg, prefixBytes = 0) {
+  const state = Int32Array.from(state0);
+  const total = prefixBytes + msg.length;
+  const padded = new Uint8Array(Math.ceil((msg.length + 9) / 64) * 64);
+  padded.set(msg); padded[msg.length] = 0x80;
+  const dv = new DataView(padded.buffer);
+  dv.setUint32(padded.length - 4, (total * 8) >>> 0);
+  dv.setUint32(padded.length - 8, Math.floor((total * 8) / 4294967296));
+  const w = new Uint32Array(16);
+  for (let off = 0; off < padded.length; off += 64) {
+    for (let i = 0; i < 16; i++) w[i] = dv.getUint32(off + i * 4);
+    sha256Block(state, w);
+  }
+  return state;
+}
+
+function sha256Js(bytes) {
+  const st = sha256From(H256, bytes, 0);
+  const out = new Uint8Array(32), dv = new DataView(out.buffer);
+  for (let i = 0; i < 8; i++) dv.setUint32(i * 4, st[i] >>> 0);
+  return out;
+}
+
+function pbkdf2Sha256Js(passwordBytes, salt, iterations) {
+  let key = passwordBytes;
+  if (key.length > 64) key = sha256Js(key);
+  const ipad = new Uint8Array(64).fill(0x36), opad = new Uint8Array(64).fill(0x5c);
+  for (let i = 0; i < key.length; i++) { ipad[i] ^= key[i]; opad[i] ^= key[i]; }
+  const blockWords = (b) => { const dv = new DataView(b.buffer); const w = new Uint32Array(16); for (let i = 0; i < 16; i++) w[i] = dv.getUint32(i * 4); return w; };
+  const istate = Int32Array.from(H256), ostate = Int32Array.from(H256);
+  sha256Block(istate, blockWords(ipad));
+  sha256Block(ostate, blockWords(opad));
+
+  // U1 = HMAC(P, salt || INT(1))
+  const first = new Uint8Array(salt.length + 4); first.set(salt); first[first.length - 1] = 1;
+  const inner1 = sha256From(istate, first, 64);
+  const outerMsg = new Uint8Array(32), odv = new DataView(outerMsg.buffer);
+  for (let i = 0; i < 8; i++) odv.setUint32(i * 4, inner1[i] >>> 0);
+  let u = sha256From(ostate, outerMsg, 64);
+  const t = Int32Array.from(u);
+
+  const w = new Uint32Array(16);
+  const si = new Int32Array(8), so = new Int32Array(8);
+  for (let n = 1; n < iterations; n++) {
+    for (let i = 0; i < 8; i++) w[i] = u[i]; w[8] = 0x80000000; for (let i = 9; i < 15; i++) w[i] = 0; w[15] = 768;
+    si.set(istate); sha256Block(si, w);
+    for (let i = 0; i < 8; i++) w[i] = si[i]; w[8] = 0x80000000; for (let i = 9; i < 15; i++) w[i] = 0; w[15] = 768;
+    so.set(ostate); sha256Block(so, w);
+    for (let i = 0; i < 8; i++) { u[i] = so[i]; t[i] ^= so[i]; }
+  }
+  const out = new Uint8Array(32), dv = new DataView(out.buffer);
+  for (let i = 0; i < 8; i++) dv.setUint32(i * 4, t[i] >>> 0);
+  return out;
+}
+
+async function hashPassword(password, saltB64 = null, iterations = 160000) {
+  const salt = saltB64 ? b64ToBytes(saltB64) : crypto.getRandomValues(new Uint8Array(16));
+  const pw = te().encode(password);
+  let bits;
+  if (globalThis.crypto?.subtle) {
+    const key = await crypto.subtle.importKey('raw', pw, 'PBKDF2', false, ['deriveBits']);
+    bits = new Uint8Array(await crypto.subtle.deriveBits(
+      { name: 'PBKDF2', salt, iterations, hash: 'SHA-256' }, key, 256));
+  } else {
+    bits = pbkdf2Sha256Js(pw, salt, iterations);   // http:// без secure context
+  }
+  return { salt: bytesToB64(salt), hash: bytesToB64(bits), iterations };
+}
+
+async function verifyPassword(password, rec) {
+  const { hash } = await hashPassword(password, rec.salt, rec.iterations);
+  return timingSafeEqual(hash, rec.hash);
+}
+
+function timingSafeEqual(a, b) {
+  if (a.length !== b.length) return false;
+  let r = 0;
+  for (let i = 0; i < a.length; i++) r |= a.charCodeAt(i) ^ b.charCodeAt(i);
+  return r === 0;
+}
+
+function bytesToB64(bytes) {
+  let bin = '';
+  for (let i = 0; i < bytes.length; i++) bin += String.fromCharCode(bytes[i]);
+  return btoa(bin);
+}
+
+function b64ToBytes(b64) {
+  const bin = atob(b64);
+  const out = new Uint8Array(bin.length);
+  for (let i = 0; i < bin.length; i++) out[i] = bin.charCodeAt(i);
+  return out;
+}
+
+// ---- Toast-уведомления ----
+function toast(msg, type = 'info', ms = 3200) {
+  let host = document.getElementById('toasts');
+  if (!host) {
+    host = document.createElement('div');
+    host.id = 'toasts';
+    document.body.appendChild(host);
+  }
+  const el = document.createElement('div');
+  el.className = 'toast toast-' + type;
+  el.textContent = msg;
+  host.appendChild(el);
+  requestAnimationFrame(() => el.classList.add('show'));
+  setTimeout(() => {
+    el.classList.remove('show');
+    setTimeout(() => el.remove(), 300);
+  }, ms);
+}
+
+// ---- Модальное подтверждение ----
+function confirmDialog(title, text, { okLabel = 'Подтвердить', danger = false } = {}) {
+  return new Promise(resolve => {
+    const wrap = document.createElement('div');
+    wrap.className = 'modal-backdrop';
+    wrap.innerHTML = `
+      <div class="modal" role="dialog" aria-modal="true">
+        <h3>${esc(title)}</h3>
+        <p>${esc(text)}</p>
+        <div class="modal-actions">
+          <button class="btn btn-ghost" data-act="cancel">Отмена</button>
+          <button class="btn ${danger ? 'btn-danger' : 'btn-primary'}" data-act="ok">${esc(okLabel)}</button>
+        </div>
+      </div>`;
+    wrap.addEventListener('click', e => {
+      if (e.target === wrap || e.target.dataset.act === 'cancel') { wrap.remove(); resolve(false); }
+      if (e.target.dataset.act === 'ok') { wrap.remove(); resolve(true); }
+    });
+    document.body.appendChild(wrap);
+  });
+}
+
+// ---- Навигация с историей: «назад» возвращается по истории, а не плодит записи ----
+function navTo(hash, from = null) {
+  history.pushState({ wsqFrom: from }, '', hash);
+  window.dispatchEvent(new HashChangeEvent('hashchange'));
+}
+/** Назад к экрану, из которого пришли (history.back); иначе обычный переход. */
+function navBack(targetFrom, fallbackHash, currentFrom = null) {
+  if (history.state && history.state.wsqFrom === targetFrom) history.back();
+  else navTo(fallbackHash, currentFrom);
+}
+
+/** Копирование текста в буфер обмена с запасным способом для iOS/Safari и file:// */
+async function copyText(text) {
+  try {
+    if (navigator.clipboard && window.isSecureContext) {
+      await navigator.clipboard.writeText(text);
+      return true;
+    }
+  } catch (_) { /* пробуем запасной способ */ }
+  try {
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    ta.setAttribute('readonly', '');
+    ta.style.cssText = 'position:fixed;top:0;left:0;opacity:0;font-size:16px';
+    document.body.appendChild(ta);
+    ta.focus(); ta.select(); ta.setSelectionRange(0, text.length);
+    const ok = document.execCommand('copy');
+    ta.remove();
+    return ok;
+  } catch (_) { return false; }
+}
+
+return { uuid, nowISO, esc, fmtDate, fmtSize, debounce, downloadBlob, sha256Js, pbkdf2Sha256Js, hashPassword, verifyPassword, bytesToB64, b64ToBytes, toast, confirmDialog, navTo, navBack, copyText };
+})();
+__M.logic = (function(){
+// logic.js — чистая логика опроса: условная видимость, прогресс, валидация,
+// формирование сводки и формат обмена. Без DOM — тестируется в Node.
+
+const { STAGES, SITE_TYPES, SCALES, SCHEMA_VERSION, getSiteType, getStatus } = __M.schema;
+const { nowISO, uuid, fmtDate } = __M.util;
+
+const EXCHANGE_FORMAT = 'webstudio.questionnaire.exchange';
+const EXCHANGE_VERSION = 1;
+const APP_VERSION = '1.0.0';
+
+// ---------- Активные типы анкеты ----------
+function activeTypes(q) {
+  const a = q.answers || {};
+  const set = new Set();
+  if (a.site_type) set.add(a.site_type);
+  for (const t of a.site_type_extra || []) set.add(t);
+  return set;
+}
+
+// ---------- Проверка условий ----------
+function checkCond(cond, q) {
+  if (!cond) return true;
+  if (cond.all) return cond.all.every(c => checkCond(c, q));
+  if (cond.any) return cond.any.some(c => checkCond(c, q));
+  if (cond.type) return activeTypes(q).has(cond.type);
+  if (cond.matrix) {
+    const v = (q.answers || {})[cond.matrix];
+    const cell = v && typeof v === 'object' ? v[cond.row] : undefined;
+    return cond.in ? cond.in.includes(cell) : !!cell;
+  }
+  if (cond.q) {
+    const v = (q.answers || {})[cond.q];
+    if (cond.has !== undefined) {
+      if (Array.isArray(v)) return v.includes(cond.has);
+      return v === cond.has;
+    }
+    if (cond.notEmpty) return v != null && v !== '' && !(Array.isArray(v) && !v.length);
+  }
+  return true;
+}
+
+// ---------- Видимость ----------
+function visibleStages(q) {
+  return STAGES.filter(st => checkCond(st.showIf, q));
+}
+
+function visibleQuestions(stage, q) {
+  return stage.questions.filter(question => checkCond(question.showIf, q));
+}
+
+// ---------- Прогресс ----------
+function progress(q) {
+  const stages = visibleStages(q);
+  let total = 0, answered = 0;
+  for (const st of stages) {
+    for (const question of visibleQuestions(st, q)) {
+      if (question.type === 'consent') continue;
+      total++;
+      if (isAnswered(question, (q.answers || {})[question.id], q)) answered++;
+    }
+  }
+  return { total, answered, percent: total ? Math.round(answered / total * 100) : 0 };
+}
+
+function isAnswered(question, v, q) {
+  if (question.type === 'files') return !!(q.fileRefs || []).some(f => f.qid === question.id);
+  if (v == null) return false;
+  if (Array.isArray(v)) return v.length > 0;
+  if (typeof v === 'object') return Object.keys(v).length > 0;
+  return String(v).trim() !== '';
+}
+
+// ---------- Валидация этапа ----------
+function validateStage(stage, q) {
+  const errors = [];
+  for (const question of visibleQuestions(stage, q)) {
+    if (!question.required) continue;
+    const v = (q.answers || {})[question.id];
+    if (question.type === 'consent') {
+      if (v !== true) errors.push({ id: question.id, msg: 'Нужно согласие на обработку данных' });
+    } else if (!isAnswered(question, v, q)) {
+      errors.push({ id: question.id, msg: 'Обязательное поле' });
+    }
+  }
+  return errors;
+}
+
+// ---------- Новая анкета ----------
+function newQuestionnaire() {
+  const ts = nowISO();
+  return {
+    id: uuid(),
+    schema_version: SCHEMA_VERSION,
+    created_at: ts,
+    updated_at: ts,
+    completed_at: null,
+    status: 'draft',
+    stage_index: 0,
+    answers: {},
+    fileRefs: [],   // [{id, qid, name, type, size}] — содержимое в хранилище файлов
+    notes: [],      // [{id, text, created_at}]
+    history: [],    // [{at, event}]
+  };
+}
+
+function logHistory(q, event) {
+  q.history = q.history || [];
+  q.history.push({ at: nowISO(), event });
+  if (q.history.length > 200) q.history = q.history.slice(-200);
+}
+
+// ---------- Человекочитаемое значение ответа ----------
+function displayValue(question, v, q) {
+  if (question.type === 'files') {
+    const fs = (q.fileRefs || []).filter(f => f.qid === question.id);
+    return fs.length ? fs.map(f => f.name).join(', ') : null;
+  }
+  if (v == null || v === '' || (Array.isArray(v) && !v.length)) return null;
+  if (question.type === 'consent') return v === true ? 'Согласие получено' : null;
+  if (question.type === 'typecards') {
+    return getSiteType(v)?.label || String(v);
+  }
+  const optLabel = (id) => {
+    if (question.options === 'SITE_TYPES_EXTRA') return getSiteType(id)?.label || id;
+    const o = (question.options || []).find(o => o.id === id);
+    return o ? o.label : id;
+  };
+  if (question.type === 'select') {
+    if (v === '__other__') {
+      const otherText = (q.answers || {})[question.id + '__other'];
+      return otherText ? 'Другое: ' + otherText : 'Другое';
+    }
+    return optLabel(v);
+  }
+  if (question.type === 'multi') {
+    const parts = v.filter(x => x !== '__other__').map(optLabel);
+    const otherText = (q.answers || {})[question.id + '__other'];
+    if (v.includes('__other__') && otherText) parts.push('Другое: ' + otherText);
+    return parts.join(', ');
+  }
+  if (question.type === 'matrix') {
+    const scale = SCALES[question.scale || 'P'];
+    const lines = [];
+    for (const row of question.rows) {
+      const cell = v[row.id];
+      if (!cell) continue;
+      let lbl = scale.find(s => s.id === cell)?.label || cell;
+      if (question.scaleLabels && question.scaleLabels[cell]) lbl = question.scaleLabels[cell];
+      lines.push(`${row.label} — ${lbl}`);
+    }
+    return lines.length ? lines : null;
+  }
+  return String(v);
+}
+
+// ---------- Сводка ----------
+const NA = 'Не указано';
+
+function buildSummary(q) {
+  const a = q.answers || {};
+  const typeLabel = getSiteType(q.answers?.site_type)?.label || NA;
+  const extraLabels = (a.site_type_extra || []).map(t => getSiteType(t)?.label || t);
+
+  const pick = id => {
+    for (const st of STAGES) {
+      const question = st.questions.find(x => x.id === id);
+      if (question) {
+        if (!checkCond(st.showIf, q) || !checkCond(question.showIf, q)) return null; // скрытые ветки не учитываются
+        return displayValue(question, a[id], q);
+      }
+    }
+    return null;
+  };
+  const line = (label, id) => ({ label, value: pick(id) ?? NA });
+
+  // Разбор матриц по приоритетам
+  const matrixByPriority = (qid, wanted) => {
+    const st = STAGES.find(s => s.questions.some(x => x.id === qid));
+    if (!st || !checkCond(st.showIf, q)) return [];
+    const question = st.questions.find(x => x.id === qid);
+    const v = a[qid] || {};
+    return question.rows.filter(r => wanted.includes(v[r.id])).map(r => r.label);
+  };
+
+  const sections = [];
+  const add = (title, items) => {
+    const filtered = items.filter(Boolean);
+    if (filtered.length) sections.push({ title, items: filtered });
+  };
+
+  add('1. Общая информация', [
+    { label: 'Дата заполнения', value: fmtDate(q.completed_at || q.updated_at) },
+    { label: 'Статус анкеты', value: getStatus(q.status).label },
+  ]);
+  add('2. Компания', [
+    line('Название компании', 'company_name'), line('Бренд', 'brand_name'),
+    line('Город / регион', 'city'), line('Территория работы', 'work_area'),
+    line('Опыт работы', 'experience'), line('Сотрудники', 'employees'),
+    line('Описание бизнеса', 'business_desc'),
+    line('Преимущества', 'advantages'), line('Существующий сайт', 'current_site'),
+    line('Конкуренты', 'competitors'),
+  ]);
+  add('3. Сфера деятельности', [
+    line('Сфера', 'industry'), line('Направления', 'main_directions'),
+    line('Товары и услуги', 'products_services'),
+  ]);
+  add('4. Целевая аудитория', [
+    line('Аудитория', 'target_audience'), line('Основные клиенты', 'main_clients'),
+    line('География клиентов', 'clients_geo'),
+  ]);
+  add('5. Цели сайта', [
+    line('Цели', 'goals'), line('Как приходят клиенты сейчас', 'clients_now'),
+    line('Проблемы сейчас', 'problems_now'), line('Ожидаемые изменения', 'expected_change'),
+    line('Критерий успеха', 'success_criteria'), line('Важные показатели', 'kpi'),
+  ]);
+  add('6. Тип сайта', [
+    { label: 'Основной тип', value: typeLabel },
+    { label: 'Дополнительные направления', value: extraLabels.length ? extraLabels.join(', ') : NA },
+    a.site_type === 'other' || (a.site_type_extra || []).includes('other')
+      ? line('Описание проекта', 'site_type_other') : null,
+  ]);
+  add('7. Структура сайта', [
+    { label: 'Обязательные разделы', value: matrixByPriority('sections', ['must']).join(', ') || NA },
+    { label: 'Желательные разделы', value: matrixByPriority('sections', ['want']).join(', ') || NA },
+    line('Другие разделы', 'sections_other'),
+    line('Примерное число страниц', 'pages_count'),
+    line('Кто будет обновлять сайт', 'who_updates'),
+  ]);
+  add('8. Пожелания по дизайну', [
+    line('Стиль', 'style'),
+    line('Основной цвет', 'color_primary'), line('Акценты', 'color_accent'),
+    line('Нежелательные цвета', 'colors_avoid'), line('Тема', 'theme_pref'),
+    line('Логотип', 'has_logo'), line('Фирменный стиль', 'has_brand'),
+    line('Нравятся сайты', 'sites_like'), line('Не нравятся', 'sites_dislike'),
+    line('Что нравится в примерах', 'like_what'), line('Референсы', 'design_refs'),
+    line('Фотографии', 'photos_usage'),
+  ]);
+  add('9. Требуемая функциональность', [
+    { label: 'Обязательно', value: matrixByPriority('features', ['must']).join(', ') || NA },
+    { label: 'Желательно', value: matrixByPriority('features', ['want']).join(', ') || NA },
+    line('CRM', 'crm_name'), line('Данные в CRM', 'crm_data'),
+    line('Языки', 'langs'), line('Внешние сервисы', 'integrations_which'),
+    line('Уведомления', 'notifications_how'), line('Другие функции', 'features_other'),
+  ]);
+
+  // Ветка выбранного типа
+  const branchStages = STAGES.filter(s => s.branch && checkCond(s.showIf, q));
+  for (const bs of branchStages) {
+    const items = [];
+    for (const question of visibleQuestions(bs, q)) {
+      const val = displayValue(question, a[question.id], q);
+      items.push({ label: question.label, value: val ?? NA });
+    }
+    add(`10. Детали: ${bs.title}`, items);
+  }
+
+  add('11. Контент и материалы', [
+    { label: 'Готово', value: matrixByPriority('materials', ['ready']).join(', ') || NA },
+    { label: 'Частично готово', value: matrixByPriority('materials', ['part']).join(', ') || NA },
+    { label: 'Отсутствует', value: matrixByPriority('materials', ['none']).join(', ') || NA },
+    { label: 'Нужна помощь', value: matrixByPriority('materials', ['help']).join(', ') || NA },
+    line('Что подготовить', 'help_needed'),
+    { label: 'Приложенные файлы', value: (q.fileRefs || []).map(f => f.name).join(', ') || NA },
+  ]);
+  add('12. Технические требования', [
+    line('Домен', 'has_domain'), line('Адрес домена', 'domain_name'), line('Хостинг', 'has_hosting'),
+    { label: 'Обязательно', value: matrixByPriority('tech_needs', ['must']).join(', ') || NA },
+    { label: 'Желательно', value: matrixByPriority('tech_needs', ['want']).join(', ') || NA },
+  ]);
+  add('13. Интеграции', [
+    line('Онлайн-оплата', 'payments_detail'), line('1С', '1c_detail'),
+    line('Прочие интеграции', 'integration_details'),
+  ]);
+  add('14. Бюджет', [line('Бюджет', 'budget')]);
+  add('15. Сроки', [line('Сроки', 'deadline'), line('Срочность', 'urgency')]);
+  add('16. Контакты', [
+    line('Имя', 'contact_name'), line('Компания', 'contact_company'),
+    line('Телефон', 'contact_phone'), line('Telegram', 'contact_telegram'),
+    line('Email', 'contact_email'), line('Способ связи', 'contact_pref'),
+    line('Удобное время', 'contact_time'),
+  ]);
+  add('17. Дополнительные пожелания', [
+    line('Комментарии', 'comments'), line('Доп. требования', 'extra_requirements'),
+    line('Важно знать разработчику', 'dev_should_know'),
+  ]);
+
+  // 18. Что уточнить: собираем «Пока не знаю» и пустые обязательные зоны
+  const clarify = [];
+  for (const st of visibleStages(q)) {
+    for (const question of visibleQuestions(st, q)) {
+      if (question.type === 'matrix') {
+        const v = a[question.id] || {};
+        const dk = question.rows.filter(r => v[r.id] === 'dk').map(r => r.label);
+        if (dk.length) clarify.push({ label: question.label, value: 'Клиент не определился: ' + dk.join(', ') });
+      }
+      if (question.type === 'select' && (a[question.id] === 'dk' || a[question.id] === 'tbd')) {
+        clarify.push({ label: question.label, value: 'Требует уточнения' });
+      }
+    }
+  }
+  if (!pick('budget') || a.budget === 'tbd' || a.budget === 'offer') {
+    clarify.push({ label: 'Бюджет', value: 'Согласовать с клиентом' });
+  }
+  add('18. Что уточнить перед началом разработки', clarify.length ? clarify : [{ label: '—', value: 'Критичных пробелов не выявлено' }]);
+
+  return sections;
+}
+
+function summaryToText(q) {
+  const sections = buildSummary(q);
+  const out = ['СВОДКА ПО АНКЕТЕ — WebStudio Questionnaire', ''];
+  for (const s of sections) {
+    out.push(s.title.toUpperCase());
+    for (const it of s.items) {
+      const val = Array.isArray(it.value) ? '\n    • ' + it.value.join('\n    • ') : it.value;
+      out.push(`  ${it.label}: ${val}`);
+    }
+    out.push('');
+  }
+  return out.join('\n');
+}
+
+// ---------- Формат обмена с WebStudio OS Local ----------
+function buildExchange(questionnaires) {
+  return {
+    format: EXCHANGE_FORMAT,
+    version: EXCHANGE_VERSION,
+    exported_at: nowISO(),
+    app: { name: 'WebStudio Questionnaire', version: APP_VERSION },
+    questionnaires: questionnaires.map(q => ({
+      id: q.id,
+      schema_version: q.schema_version || SCHEMA_VERSION,
+      created_at: q.created_at, updated_at: q.updated_at, completed_at: q.completed_at,
+      status: q.status, stage_index: q.stage_index,
+      answers: q.answers || {},
+      files: (q.fileRefs || []).map(f => ({ id: f.id, qid: f.qid, name: f.name, type: f.type, size: f.size })),
+      notes: q.notes || [], history: q.history || [],
+    })),
+  };
+}
+
+/** Проверка структуры импортируемого файла. Возвращает {ok, errors, data}. */
+function validateExchange(obj) {
+  const errors = [];
+  if (!obj || typeof obj !== 'object') errors.push('Файл не содержит данных JSON.');
+  else {
+    if (obj.format !== EXCHANGE_FORMAT) errors.push(`Неизвестный формат: «${obj.format || 'не указан'}». Ожидался ${EXCHANGE_FORMAT}.`);
+    if (typeof obj.version !== 'number') errors.push('Не указана версия формата.');
+    else if (obj.version > EXCHANGE_VERSION) errors.push(`Версия формата ${obj.version} новее поддерживаемой (${EXCHANGE_VERSION}). Обновите приложение.`);
+    if (!Array.isArray(obj.questionnaires)) errors.push('Отсутствует список анкет (questionnaires).');
+    else obj.questionnaires.forEach((q, i) => {
+      if (!q.id) errors.push(`Анкета №${i + 1}: нет обязательного поля id.`);
+      if (!q.created_at) errors.push(`Анкета №${i + 1}: нет обязательного поля created_at.`);
+      if (q.answers == null || typeof q.answers !== 'object') errors.push(`Анкета №${i + 1}: нет блока ответов (answers).`);
+    });
+  }
+  return { ok: errors.length === 0, errors, data: errors.length ? null : obj };
+}
+
+/** Привести импортированную запись к внутреннему виду. */
+function fromExchange(rec) {
+  return {
+    id: rec.id,
+    schema_version: rec.schema_version || 1,
+    created_at: rec.created_at,
+    updated_at: rec.updated_at || rec.created_at,
+    completed_at: rec.completed_at || null,
+    status: ['draft', 'progress', 'completed', 'sent', 'archived'].includes(rec.status) ? rec.status : 'draft',
+    stage_index: rec.stage_index || 0,
+    answers: rec.answers || {},
+    fileRefs: (rec.files || []).map(f => ({ id: f.id, qid: f.qid, name: f.name, type: f.type, size: f.size })),
+    notes: rec.notes || [],
+    history: rec.history || [],
+  };
+}
+
+/** Весь итог одним текстом: шапка + ответы по всем активным этапам + файлы. */
+function fullReportText(q) {
+  const a = q.answers || {};
+  const out = [];
+  out.push('АНКЕТА КЛИЕНТА — WebStudio Questionnaire');
+  out.push(`Клиент: ${a.company_name || a.contact_name || NA}`);
+  out.push(`Тип сайта: ${getSiteType(a.site_type)?.label || NA}`);
+  out.push(`Статус: ${getStatus(q.status).label}`);
+  out.push(`Создана: ${fmtDate(q.created_at)}${q.completed_at ? ' · Завершена: ' + fmtDate(q.completed_at) : ''}`);
+  out.push('');
+  for (const st of visibleStages(q)) {
+    out.push(`=== ${st.title.toUpperCase()} ===`);
+    for (const question of visibleQuestions(st, q)) {
+      if (question.type === 'consent') continue;
+      const v = displayValue(question, a[question.id], q);
+      if (v == null) out.push(`${question.label}: ${NA}`);
+      else if (Array.isArray(v)) out.push(`${question.label}:\n` + v.map(x => '  • ' + x).join('\n'));
+      else out.push(`${question.label}: ${v}`);
+    }
+    out.push('');
+  }
+  if (a.consent === true) out.push('Согласие на обработку данных: получено');
+  const fl = (q.fileRefs || []).map(f => f.name);
+  out.push('Прикреплённые файлы: ' + (fl.length ? fl.join(', ') : NA));
+  return out.join('\n');
+}
+
+return { EXCHANGE_FORMAT, EXCHANGE_VERSION, APP_VERSION, activeTypes, checkCond, visibleStages, visibleQuestions, progress, isAnswered, validateStage, newQuestionnaire, logHistory, displayValue, buildSummary, summaryToText, buildExchange, validateExchange, fromExchange, fullReportText };
+})();
+__M.theme = (function(){
+// theme.js — тема оформления (вынесено из app.js, чтобы не было циклических импортов)
+function applyTheme(theme) {
+  document.documentElement.dataset.theme = theme;
+  try { localStorage.setItem('wsq_theme', theme); } catch (_) {}
+}
+function initTheme() {
+  let t = null;
+  try { t = localStorage.getItem('wsq_theme'); } catch (_) {}
+  if (!t) t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  applyTheme(t);
+}
+function toggleTheme() {
+  applyTheme(document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark');
+}
+function themeButton() {
+  const b = document.createElement('button');
+  b.className = 'btn btn-ghost btn-icon no-print';
+  b.title = 'Переключить тему';
+  b.setAttribute('aria-label', 'Переключить тему');
+  const icon = () => document.documentElement.dataset.theme === 'dark' ? '☀️' : '🌙';
+  b.textContent = icon();
+  b.onclick = () => { toggleTheme(); b.textContent = icon(); };
+  return b;
+}
+
+return { applyTheme, initTheme, toggleTheme, themeButton };
+})();
+__M.survey = (function(){
+// survey.js — клиентская часть: главная, пошаговый мастер, финальный просмотр.
+const { SITE_TYPES, SCALES, DEFAULT_CONSENT_TEXT } = __M.schema;
+const { visibleStages, visibleQuestions, validateStage, progress, newQuestionnaire, logHistory, displayValue, fullReportText } = __M.logic;
+const db = __M.db;
+const { esc, uuid, nowISO, fmtDate, fmtSize, debounce, toast, confirmDialog, navTo, navBack, copyText } = __M.util;
+const { themeButton } = __M.theme;
+
+const ALLOWED_EXT = ['jpg', 'jpeg', 'png', 'webp', 'pdf', 'docx', 'xlsx', 'txt'];
+const MAX_FILE_MB = 15;
+const MAX_FILES_PER_Q = 20;
+
+// ───────────────────────── Главная ─────────────────────────
+async function renderHome(app) {
+  const all = await db.getAllQuestionnaires();
+  const drafts = all
+    .filter(q => q.status === 'draft' || q.status === 'progress')
+    .sort((a, b) => (b.updated_at || '').localeCompare(a.updated_at || ''));
+
+  app.innerHTML = `
+    <div class="topbar">
+      <div class="brand"><div class="logo">W</div> WebStudio Questionnaire</div>
+      <div class="nav-actions"></div>
+    </div>
+    <div class="hero">
+      <h1>Анкета для разработки сайта</h1>
+      <p>Ответьте на вопросы о вашем бизнесе и будущем сайте — это займёт 15–25 минут.
+         Ответы сохраняются автоматически, можно прерваться и продолжить позже.</p>
+      <div class="hero-actions">
+        <button class="btn btn-primary" id="btn-new" style="padding:13px 28px;font-size:15.5px">Заполнить анкету</button>
+      </div>
+    </div>
+    ${drafts.length ? `
+      <div class="card" style="margin-top:8px">
+        <h3 style="margin-bottom:12px">Незавершённые анкеты</h3>
+        <div class="qlist" id="drafts"></div>
+      </div>` : ''}
+    <p style="text-align:center;margin-top:28px"><a class="dim" href="#/admin">Вход для администратора</a></p>
+  `;
+  app.querySelector('.nav-actions').appendChild(themeButton());
+  app.querySelector('#btn-new').onclick = async () => {
+    const q = newQuestionnaire();
+    logHistory(q, 'Анкета создана');
+    await db.putQuestionnaire(q);
+    location.hash = '#/survey/' + q.id;
+  };
+  if (drafts.length) {
+    const host = app.querySelector('#drafts');
+    for (const q of drafts) {
+      const p = progress(q);
+      const row = document.createElement('div');
+      row.className = 'card qrow';
+      row.innerHTML = `
+        <div class="qmain">
+          <div class="qtitle">${esc(q.answers?.company_name || 'Анкета без названия')}</div>
+          <div class="qsub">Изменена ${fmtDate(q.updated_at)} · заполнено ${p.percent}%</div>
+        </div>
+        <span class="badge badge-blue">Продолжить</span>
+        <button class="btn btn-ghost btn-icon btn-sm row-del" title="Удалить черновик" aria-label="Удалить черновик">🗑</button>`;
+      row.querySelector('.row-del').onclick = async (e) => {
+        e.stopPropagation();
+        const ok = await confirmDialog('Удалить черновик?',
+          `Незавершённая анкета «${q.answers?.company_name || 'без названия'}» и её файлы будут удалены безвозвратно.`,
+          { okLabel: 'Удалить', danger: true });
+        if (!ok) return;
+        await db.deleteQuestionnaire(q.id);
+        toast('Черновик удалён', 'info');
+        renderHome(app);
+      };
+      row.onclick = () => location.hash = '#/survey/' + q.id;
+      host.appendChild(row);
+    }
+  }
+}
+
+// ───────────────────────── Мастер опроса ─────────────────────────
+async function renderSurvey(app, idAndStage) {
+  const [id, stageParam] = (idAndStage || '').split('?s=');
+  const q = await db.getQuestionnaire(id);
+  if (!q) {
+    toast('Анкета не найдена', 'error');
+    location.hash = '#/';
+    return;
+  }
+  if (stageParam != null) q.stage_index = parseInt(stageParam, 10) || 0;
+
+  const save = async (silent = true) => {
+    q.updated_at = nowISO();
+    if (q.status === 'draft' && Object.keys(q.answers).length > 1) q.status = 'progress';
+    const stateEl = () => document.getElementById('save-state');
+    try {
+      await db.putQuestionnaire(q);
+      if (stateEl()) stateEl().textContent = '✓ Сохранено в ' + new Date().toTimeString().slice(0, 5);
+    } catch (err) {
+      if (stateEl()) stateEl().textContent = '⚠ Не сохранено';
+      toast('Не удалось сохранить: ' + err.message, 'error', 6000);
+      throw err;
+    }
+    if (!silent) toast('Сохранено', 'success', 1500);
+  };
+  const autoSave = debounce(() => save().catch(() => {}), 500);
+
+  // Вперёд — новая запись истории; назад — настоящий history.back(),
+  // поэтому системный «назад»/свайп на iPhone ведёт на предыдущий этап.
+  const stageHash = i => `#/survey/${q.id}?s=${i}`;
+  const goStage = async (i) => {
+    const from = q.stage_index;
+    q.stage_index = i;
+    await save();
+    if (i === from - 1) navBack(i, stageHash(i), from);
+    else navTo(stageHash(i), from);
+  };
+
+  let stages = visibleStages(q);
+  if (q.stage_index >= stages.length) q.stage_index = stages.length - 1;
+
+  const render = () => {
+    stages = visibleStages(q);
+    if (q.stage_index >= stages.length) q.stage_index = stages.length - 1;
+    const stage = stages[q.stage_index];
+    const p = progress(q);
+    const isLast = q.stage_index === stages.length - 1;
+
+    app.innerHTML = `
+      <div class="topbar no-print">
+        <div class="topbar-left">
+          <button class="btn btn-ghost btn-icon" id="btn-top-back" aria-label="Назад" title="Назад">←</button>
+          <div class="brand"><div class="logo">W</div><span class="brand-name">Анкета сайта</span></div>
+        </div>
+        <div class="nav-actions">
+          <button class="btn btn-ghost btn-sm" id="btn-exit">Сохранить и выйти</button>
+        </div>
+      </div>
+      <div class="progress-wrap no-print">
+        <div class="pbar"><div style="width:${p.percent}%"></div></div>
+        <div class="steps" id="steps"></div>
+        <div class="savestate" id="save-state">Ответы сохраняются автоматически</div>
+      </div>
+      <div class="card" style="margin-top:10px">
+        <h2>${stage.icon} ${esc(stage.title)}</h2>
+        <p class="muted" style="margin:6px 0 20px">${esc(stage.desc || '')}</p>
+        <div id="questions"></div>
+      </div>
+      <div class="wiz-nav">
+        ${q.stage_index > 0 ? '<button class="btn btn-ghost" id="btn-back">← Назад</button>' : ''}
+        <button class="btn btn-primary" id="btn-next">${isLast ? 'К просмотру анкеты' : 'Продолжить →'}</button>
+      </div>`;
+
+    app.querySelector('.nav-actions').prepend(themeButton());
+
+    // Шаги
+    const stepsHost = app.querySelector('#steps');
+    stages.forEach((st, i) => {
+      const pill = document.createElement('span');
+      pill.className = 'step-pill' + (i === q.stage_index ? ' on' : i < q.stage_index ? ' done' : '');
+      pill.textContent = `${i + 1}. ${st.title}`;
+      if (i <= q.stage_index) pill.onclick = () => goStage(i);
+      stepsHost.appendChild(pill);
+    });
+    stepsHost.querySelector('.on')?.scrollIntoView({ inline: 'center', block: 'nearest' });
+
+    // Вопросы
+    const qHost = app.querySelector('#questions');
+    renderQuestions(qHost, stage, q, { autoSave, rerender: render });
+
+    // Навигация
+    app.querySelector('#btn-exit').onclick = async () => { await save(false); location.hash = '#/'; };
+    const back = app.querySelector('#btn-back');
+    if (back) back.onclick = () => goStage(q.stage_index - 1);
+    app.querySelector('#btn-top-back').onclick = async () => {
+      if (q.stage_index > 0) return goStage(q.stage_index - 1);
+      await save(); location.hash = '#/';
+    };
+    app.querySelector('#btn-next').onclick = async () => {
+      const errors = validateStage(stage, q);
+      markErrors(qHost, errors);
+      if (errors.length) {
+        toast('Заполните обязательные поля', 'error');
+        qHost.querySelector('.field.error')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        return;
+      }
+      if (isLast) { await save(); navTo('#/review/' + q.id, q.stage_index); }
+      else await goStage(q.stage_index + 1);
+    };
+  };
+
+  render();
+}
+
+function markErrors(host, errors) {
+  host.querySelectorAll('.field.error').forEach(f => f.classList.remove('error'));
+  host.querySelectorAll('.err-msg').forEach(e => e.remove());
+  for (const err of errors) {
+    const f = host.querySelector(`[data-qid="${err.id}"]`);
+    if (f) {
+      f.classList.add('error');
+      const m = document.createElement('div');
+      m.className = 'err-msg';
+      m.textContent = err.msg;
+      f.appendChild(m);
+    }
+  }
+}
+
+// ───────────────────────── Рендер вопросов ─────────────────────────
+function renderQuestions(host, stage, q, ctx) {
+  host.innerHTML = '';
+  const qs = visibleQuestions(stage, q);
+  for (const question of qs) host.appendChild(renderQuestion(question, q, ctx, stage));
+}
+
+function fieldWrap(question) {
+  const f = document.createElement('div');
+  f.className = 'field';
+  f.dataset.qid = question.id;
+  if (question.type !== 'consent') {
+    f.innerHTML = `<label class="q-label">${esc(question.label)}${question.required ? '<span class="req">*</span>' : ''}</label>`;
+    if (question.hint) f.insertAdjacentHTML('beforeend', `<div class="hint">${esc(question.hint)}</div>`);
+  }
+  return f;
+}
+
+function renderQuestion(question, q, ctx, stage) {
+  const a = q.answers;
+  const f = fieldWrap(question);
+  const changed = (needRerender = false) => {
+    ctx.autoSave();
+    if (needRerender) ctx.rerender();
+  };
+  switch (question.type) {
+    case 'text': {
+      const inp = document.createElement('input');
+      inp.className = 'input';
+      inp.type = 'text';
+      inp.enterKeyHint = 'done';
+      if (question.inputmode) inp.inputMode = question.inputmode;
+      inp.value = a[question.id] || '';
+      inp.oninput = () => { a[question.id] = inp.value; changed(); };
+      f.appendChild(inp);
+      break;
+    }
+    case 'textarea': {
+      const inp = document.createElement('textarea');
+      inp.className = 'input';
+      inp.value = a[question.id] || '';
+      inp.oninput = () => { a[question.id] = inp.value; changed(); autoGrow(inp); };
+      f.appendChild(inp);
+      requestAnimationFrame(() => autoGrow(inp));
+      break;
+    }
+    case 'select': {
+      const sel = document.createElement('select');
+      sel.className = 'input';
+      const opts = resolveOptions(question, q);
+      sel.innerHTML = '<option value="">— Не выбрано —</option>' +
+        opts.map(o => `<option value="${esc(o.id)}">${esc(o.label)}</option>`).join('') +
+        (question.other ? '<option value="__other__">Другое…</option>' : '');
+      sel.value = a[question.id] || '';
+      const otherInp = document.createElement('input');
+      otherInp.className = 'input';
+      otherInp.placeholder = 'Уточните…';
+      otherInp.style.marginTop = '8px';
+      otherInp.value = a[question.id + '__other'] || '';
+      otherInp.hidden = sel.value !== '__other__';
+      otherInp.oninput = () => { a[question.id + '__other'] = otherInp.value; changed(); };
+      sel.onchange = () => {
+        a[question.id] = sel.value || undefined;
+        if (!sel.value) delete a[question.id];
+        otherInp.hidden = sel.value !== '__other__';
+        changed(SCHEMA_DEPENDENTS.has(question.id));
+      };
+      f.appendChild(sel);
+      f.appendChild(otherInp);
+      break;
+    }
+    case 'multi': {
+      const wrap = document.createElement('div');
+      wrap.className = 'chips';
+      const opts = resolveOptions(question, q);
+      const cur = () => a[question.id] || [];
+      const make = (id, label) => {
+        const lbl = document.createElement('label');
+        lbl.className = 'chip' + (cur().includes(id) ? ' on' : '');
+        lbl.innerHTML = `<input type="checkbox"> ${esc(label)}`;
+        lbl.querySelector('input').checked = cur().includes(id);
+        lbl.onclick = (e) => {
+          e.preventDefault();
+          const arr = new Set(cur());
+          arr.has(id) ? arr.delete(id) : arr.add(id);
+          a[question.id] = [...arr];
+          if (!a[question.id].length) delete a[question.id];
+          lbl.classList.toggle('on');
+          otherInp.hidden = !(a[question.id] || []).includes('__other__');
+          changed(SCHEMA_DEPENDENTS.has(question.id));
+        };
+        return lbl;
+      };
+      for (const o of opts) wrap.appendChild(make(o.id, o.label));
+      if (question.other) wrap.appendChild(make('__other__', 'Другое…'));
+      const otherInp = document.createElement('input');
+      otherInp.className = 'input';
+      otherInp.placeholder = 'Уточните…';
+      otherInp.style.marginTop = '10px';
+      otherInp.value = a[question.id + '__other'] || '';
+      otherInp.hidden = !cur().includes('__other__');
+      otherInp.oninput = () => { a[question.id + '__other'] = otherInp.value; changed(); };
+      f.appendChild(wrap);
+      f.appendChild(otherInp);
+      break;
+    }
+    case 'typecards': {
+      const grid = document.createElement('div');
+      grid.className = 'typegrid';
+      for (const t of SITE_TYPES) {
+        const c = document.createElement('div');
+        c.className = 'typecard' + (a.site_type === t.id ? ' on' : '');
+        c.innerHTML = `<span class="ic">${t.icon}</span><span class="tl">${esc(t.label)}</span>`;
+        c.onclick = () => {
+          a.site_type = t.id;
+          // убрать дубли из дополнительных направлений
+          if (Array.isArray(a.site_type_extra)) {
+            a.site_type_extra = a.site_type_extra.filter(x => x !== t.id);
+            if (!a.site_type_extra.length) delete a.site_type_extra;
+          }
+          changed(true);
+        };
+        grid.appendChild(c);
+      }
+      f.appendChild(grid);
+      break;
+    }
+    case 'matrix': {
+      const scale = SCALES[question.scale || 'P'];
+      const m = document.createElement('div');
+      m.className = 'matrix';
+      const val = a[question.id] || {};
+      for (const row of question.rows) {
+        const r = document.createElement('div');
+        r.className = 'mrow';
+        const lbl = document.createElement('div');
+        lbl.className = 'mlabel';
+        lbl.textContent = row.label;
+        const seg = document.createElement('div');
+        seg.className = 'seg';
+        for (const s of scale) {
+          const b = document.createElement('button');
+          b.type = 'button';
+          b.dataset.v = s.id;
+          b.textContent = (question.scaleLabels && question.scaleLabels[s.id]) || s.label;
+          if (val[row.id] === s.id) b.classList.add('on');
+          b.onclick = () => {
+            const cur = a[question.id] || (a[question.id] = {});
+            if (cur[row.id] === s.id) { delete cur[row.id]; b.classList.remove('on'); }
+            else {
+              cur[row.id] = s.id;
+              seg.querySelectorAll('button').forEach(x => x.classList.remove('on'));
+              b.classList.add('on');
+            }
+            if (!Object.keys(a[question.id]).length) delete a[question.id];
+            changed(SCHEMA_DEPENDENTS.has(question.id));
+          };
+          seg.appendChild(b);
+        }
+        r.appendChild(lbl);
+        r.appendChild(seg);
+        m.appendChild(r);
+      }
+      f.appendChild(m);
+      break;
+    }
+    case 'files': {
+      renderFileInput(f, question, q, ctx);
+      break;
+    }
+    case 'consent': {
+      const box = document.createElement('div');
+      box.className = 'consent-box';
+      const render = async () => {
+        const custom = await db.getSetting('consent_text');
+        box.innerHTML = `
+          <div>${esc(custom || DEFAULT_CONSENT_TEXT)}</div>
+          <label><input type="checkbox" ${a.consent === true ? 'checked' : ''}>
+            Я согласен(на) с обработкой указанных данных<span class="req">*</span></label>`;
+        box.querySelector('input').onchange = (e) => {
+          a.consent = e.target.checked ? true : undefined;
+          if (!a.consent) delete a.consent;
+          ctx.autoSave();
+        };
+      };
+      render();
+      f.appendChild(box);
+      break;
+    }
+  }
+  if (question.example) f.insertAdjacentHTML('beforeend', `<div class="example">Пример: ${esc(question.example)}</div>`);
+  return f;
+}
+
+function autoGrow(ta) {
+  ta.style.height = 'auto';
+  ta.style.height = Math.min(ta.scrollHeight + 2, 400) + 'px';
+}
+
+function resolveOptions(question, q) {
+  if (question.options === 'SITE_TYPES_EXTRA') {
+    return SITE_TYPES.filter(t => t.id !== q.answers.site_type).map(t => ({ id: t.id, label: t.label }));
+  }
+  return question.options || [];
+}
+
+// Вопросы, от которых зависит видимость других (кэш по схеме)
+const { STAGES: _ST } = __M.schema;
+const SCHEMA_DEPENDENTS = (() => {
+  const deps = new Set(['site_type', 'site_type_extra']);
+  const walk = c => {
+    if (!c) return;
+    if (c.q) deps.add(c.q);
+    if (c.matrix) deps.add(c.matrix);
+    (c.all || []).forEach(walk);
+    (c.any || []).forEach(walk);
+  };
+  for (const st of _ST) {
+    walk(st.showIf);
+    for (const question of st.questions) walk(question.showIf);
+  }
+  return deps;
+})();
+
+// ───────────────────────── Файлы ─────────────────────────
+function sanitizeName(name) {
+  const base = name.replace(/[\\/:*?"<>|]/g, '_').replace(/\s+/g, ' ').trim().slice(0, 120);
+  return base || 'file';
+}
+
+function renderFileInput(f, question, q, ctx) {
+  const zone = document.createElement('div');
+  zone.className = 'dropzone';
+  zone.innerHTML = `📎 Нажмите, чтобы выбрать файлы<br><span class="dim">JPG, PNG, WEBP, PDF, DOCX, XLSX, TXT · до ${MAX_FILE_MB} МБ</span>`;
+  const inp = document.createElement('input');
+  inp.type = 'file';
+  inp.multiple = true;
+  inp.accept = '.jpg,.jpeg,.png,.webp,.pdf,.docx,.xlsx,.txt,image/*';
+  inp.hidden = true;
+  const list = document.createElement('div');
+  list.className = 'filelist';
+
+  const refresh = () => {
+    list.innerHTML = '';
+    for (const ref of (q.fileRefs || []).filter(r => r.qid === question.id)) {
+      const item = document.createElement('div');
+      item.className = 'fileitem';
+      item.innerHTML = `<span>📄</span><span class="fname">${esc(ref.name)}</span>
+        <span class="dim">${fmtSize(ref.size)}</span>
+        <button class="fdel" title="Удалить">✕</button>`;
+      item.querySelector('.fdel').onclick = async () => {
+        if (!(await confirmDialog('Удалить файл?', `Файл «${ref.name}» будет удалён из анкеты.`, { okLabel: 'Удалить', danger: true }))) return;
+        await db.deleteFile(ref.id);
+        q.fileRefs = q.fileRefs.filter(r => r.id !== ref.id);
+        await db.putQuestionnaire(q);
+        refresh();
+        toast('Файл удалён', 'info');
+      };
+      list.appendChild(item);
+    }
+  };
+
+  const addFiles = async (files) => {
+    const current = (q.fileRefs || []).filter(r => r.qid === question.id).length;
+    let added = 0;
+    for (const file of files) {
+      if (current + added >= MAX_FILES_PER_Q) { toast(`Не более ${MAX_FILES_PER_Q} файлов на вопрос`, 'error'); break; }
+      const ext = (file.name.split('.').pop() || '').toLowerCase();
+      if (!ALLOWED_EXT.includes(ext)) { toast(`«${file.name}»: формат .${ext} не поддерживается`, 'error', 4500); continue; }
+      if (file.size > MAX_FILE_MB * 1024 * 1024) { toast(`«${file.name}»: больше ${MAX_FILE_MB} МБ`, 'error', 4500); continue; }
+      const ref = { id: uuid(), qid: question.id, name: sanitizeName(file.name), type: file.type || 'application/octet-stream', size: file.size };
+      try {
+        await db.putFile({ ...ref, blob: file });
+        q.fileRefs = q.fileRefs || [];
+        q.fileRefs.push(ref);
+        added++;
+      } catch (err) {
+        toast('Не удалось сохранить файл: ' + err.message, 'error', 5000);
+      }
+    }
+    if (added) {
+      q.updated_at = nowISO();
+      await db.putQuestionnaire(q);
+      toast(added === 1 ? 'Файл добавлен' : `Добавлено файлов: ${added}`, 'success');
+      refresh();
+    }
+  };
+
+  zone.onclick = () => inp.click();
+  zone.ondragover = e => { e.preventDefault(); zone.classList.add('drag'); };
+  zone.ondragleave = () => zone.classList.remove('drag');
+  zone.ondrop = e => { e.preventDefault(); zone.classList.remove('drag'); addFiles(e.dataTransfer.files); };
+  inp.onchange = () => { addFiles(inp.files); inp.value = ''; };
+
+  f.appendChild(zone);
+  f.appendChild(inp);
+  f.appendChild(list);
+  refresh();
+}
+
+// ───────────────────────── Финальный просмотр ─────────────────────────
+async function renderReview(app, id) {
+  const q = await db.getQuestionnaire(id);
+  if (!q) { location.hash = '#/'; return; }
+  const stages = visibleStages(q);
+  const p = progress(q);
+
+  app.innerHTML = `
+    <div class="topbar no-print">
+      <div class="topbar-left">
+        <button class="btn btn-ghost btn-icon" id="btn-top-back" aria-label="Назад" title="Назад">←</button>
+        <div class="brand"><div class="logo">W</div><span class="brand-name">Проверка анкеты</span></div>
+      </div>
+      <div class="nav-actions"></div>
+    </div>
+    <div class="card">
+      <h2>Проверьте ответы перед отправкой</h2>
+      <p class="muted" style="margin:6px 0 4px">Заполнено ${p.answered} из ${p.total} вопросов (${p.percent}%).
+        Нажмите «Изменить», чтобы вернуться к любому этапу.</p>
+      <button class="btn btn-ghost btn-sm" id="btn-copy-all" style="margin-top:10px">📋 Скопировать весь итог</button>
+    </div>
+    <div id="review"></div>
+    <div class="wiz-nav">
+      <button class="btn btn-ghost" id="btn-back">← Вернуться</button>
+      <button class="btn btn-primary" id="btn-submit">Отправить анкету ✓</button>
+    </div>`;
+  app.querySelector('.nav-actions').appendChild(themeButton());
+
+  const host = app.querySelector('#review');
+  stages.forEach((st, i) => {
+    const block = document.createElement('div');
+    block.className = 'card';
+    block.style.marginTop = '12px';
+    let rows = '';
+    for (const question of visibleQuestions(st, q)) {
+      const v = displayValue(question, q.answers[question.id], q);
+      const text = v == null ? '<span class="dim">— не заполнено —</span>'
+        : Array.isArray(v) ? esc(v.join('\n')) : esc(v);
+      rows += `<div class="review-q"><div class="rq">${esc(question.label)}</div><div class="ra">${text}</div></div>`;
+    }
+    block.innerHTML = `
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:10px">
+        <h3>${st.icon} ${esc(st.title)}</h3>
+        <button class="btn btn-ghost btn-sm">Изменить</button>
+      </div>${rows}`;
+    block.querySelector('button').onclick = () => {
+      location.hash = `#/survey/${q.id}?s=${i}`;
+    };
+    host.appendChild(block);
+  });
+
+  app.querySelector('#btn-copy-all').onclick = async () => {
+    (await copyText(fullReportText(q)))
+      ? toast('Весь итог скопирован — можно вставить в сообщение или документ', 'success', 3500)
+      : toast('Не удалось скопировать автоматически', 'error');
+  };
+  const last = stages.length - 1;
+  const toLast = () => navBack(last, `#/survey/${q.id}?s=${last}`, null);
+  app.querySelector('#btn-back').onclick = toLast;
+  app.querySelector('#btn-top-back').onclick = toLast;
+  app.querySelector('#btn-submit').onclick = async () => {
+    // финальная проверка всех обязательных полей
+    for (let i = 0; i < stages.length; i++) {
+      const errors = validateStage(stages[i], q);
+      if (errors.length) {
+        toast(`На этапе «${stages[i].title}» есть незаполненные обязательные поля`, 'error', 5000);
+        location.hash = `#/survey/${q.id}?s=${i}`;
+        return;
+      }
+    }
+    q.status = 'completed';
+    q.completed_at = nowISO();
+    q.updated_at = q.completed_at;
+    logHistory(q, 'Анкета завершена клиентом');
+    await db.putQuestionnaire(q);
+    location.hash = '#/done';
+  };
+}
+
+async function renderDone(app) {
+  app.innerHTML = `
+    <div class="hero" style="padding-top:80px">
+      <div style="font-size:56px;margin-bottom:16px">🎉</div>
+      <h1>Анкета отправлена!</h1>
+      <p>Спасибо за подробные ответы. Мы изучим информацию и свяжемся с вами
+         удобным для вас способом.</p>
+      <div class="hero-actions"><a class="btn btn-ghost" href="#/">На главную</a></div>
+    </div>`;
+}
+
+return { renderHome, renderSurvey, renderReview, renderDone };
+})();
+__M.charts = (function(){
+// charts.js — лёгкие SVG-графики без библиотек. Данные всегда реальные (из базы).
+const PALETTE = ['#4f6ef7', '#16a34a', '#d97706', '#7c3aed', '#dc2626', '#0891b2', '#db2777', '#65a30d', '#6b7280'];
+
+const svgEl = (w, h) => {
+  const s = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+  s.setAttribute('viewBox', `0 0 ${w} ${h}`);
+  s.classList.add('chart-svg');
+  return s;
+};
+const esc = s => String(s).replace(/[&<>"]/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[m]));
+
+/** Горизонтальные полосы: data = [{label, value}] */
+function barChart(data, { color = PALETTE[0] } = {}) {
+  const rows = data.filter(d => d.value > 0);
+  if (!rows.length) return emptyNote();
+  const max = Math.max(...rows.map(d => d.value));
+  const rowH = 30, w = 560, labelW = 200;
+  const svg = svgEl(w, rows.length * rowH + 6);
+  let y = 4;
+  for (const [i, d] of rows.entries()) {
+    const bw = Math.max(3, (d.value / max) * (w - labelW - 50));
+    svg.insertAdjacentHTML('beforeend', `
+      <text x="${labelW - 10}" y="${y + 15}" text-anchor="end" font-size="12" fill="var(--text-2)">${esc(truncate(d.label, 26))}</text>
+      <rect x="${labelW}" y="${y + 3}" width="${bw}" height="17" rx="5" fill="${d.color || color}" opacity="0.9"/>
+      <text x="${labelW + bw + 8}" y="${y + 16}" font-size="12.5" font-weight="650" fill="var(--text)">${d.value}</text>`);
+    y += rowH;
+  }
+  return svg;
+}
+
+/** Кольцевая диаграмма: data = [{label, value, color?}], возвращает {svg, legend} */
+function donutChart(data) {
+  const rows = data.filter(d => d.value > 0);
+  if (!rows.length) return { el: emptyNote() };
+  const total = rows.reduce((a, d) => a + d.value, 0);
+  const cx = 90, cy = 90, r = 66, sw = 26;
+  const svg = svgEl(180, 180);
+  let angle = -Math.PI / 2;
+  rows.forEach((d, i) => {
+    const frac = d.value / total;
+    const a2 = angle + frac * 2 * Math.PI;
+    const large = frac > 0.5 ? 1 : 0;
+    const x1 = cx + r * Math.cos(angle), y1 = cy + r * Math.sin(angle);
+    const x2 = cx + r * Math.cos(a2 - 0.012), y2 = cy + r * Math.sin(a2 - 0.012);
+    const color = d.color || PALETTE[i % PALETTE.length];
+    if (frac >= 0.999) {
+      svg.insertAdjacentHTML('beforeend', `<circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="${color}" stroke-width="${sw}"/>`);
+    } else {
+      svg.insertAdjacentHTML('beforeend',
+        `<path d="M ${x1} ${y1} A ${r} ${r} 0 ${large} 1 ${x2} ${y2}" fill="none" stroke="${color}" stroke-width="${sw}" stroke-linecap="butt"/>`);
+    }
+    d._color = color;
+    angle = a2;
+  });
+  svg.insertAdjacentHTML('beforeend',
+    `<text x="${cx}" y="${cy - 2}" text-anchor="middle" font-size="26" font-weight="750" fill="var(--text)">${total}</text>
+     <text x="${cx}" y="${cy + 18}" text-anchor="middle" font-size="11" fill="var(--text-3)">всего</text>`);
+  const legend = document.createElement('div');
+  legend.className = 'legend';
+  for (const d of rows) {
+    legend.insertAdjacentHTML('beforeend',
+      `<span><i style="background:${d._color}"></i>${esc(d.label)} — ${d.value}</span>`);
+  }
+  const wrap = document.createElement('div');
+  wrap.style.cssText = 'display:flex;gap:18px;align-items:center;flex-wrap:wrap';
+  const svgBox = document.createElement('div');
+  svgBox.style.cssText = 'width:150px;flex-shrink:0';
+  svgBox.appendChild(svg);
+  wrap.appendChild(svgBox);
+  wrap.appendChild(legend);
+  return { el: wrap };
+}
+
+/** Линия динамики: data = [{label, value}] (по дням/неделям) */
+function lineChart(data) {
+  if (!data.length || data.every(d => !d.value)) return emptyNote();
+  const w = 560, h = 170, padL = 30, padB = 26, padT = 12;
+  const max = Math.max(...data.map(d => d.value), 1);
+  const stepX = (w - padL - 10) / Math.max(data.length - 1, 1);
+  const pts = data.map((d, i) => [padL + i * stepX, padT + (1 - d.value / max) * (h - padT - padB)]);
+  const path = pts.map((p, i) => (i ? 'L' : 'M') + p[0].toFixed(1) + ' ' + p[1].toFixed(1)).join(' ');
+  const area = path + ` L ${pts[pts.length - 1][0].toFixed(1)} ${h - padB} L ${padL} ${h - padB} Z`;
+  const svg = svgEl(w, h);
+  svg.insertAdjacentHTML('beforeend', `
+    <defs><linearGradient id="lg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#4f6ef7" stop-opacity="0.25"/>
+      <stop offset="1" stop-color="#4f6ef7" stop-opacity="0"/></linearGradient></defs>
+    <line x1="${padL}" y1="${h - padB}" x2="${w - 8}" y2="${h - padB}" stroke="var(--border)" />
+    <path d="${area}" fill="url(#lg)"/>
+    <path d="${path}" fill="none" stroke="#4f6ef7" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>`);
+  for (const [i, p] of pts.entries()) {
+    if (data[i].value > 0) {
+      svg.insertAdjacentHTML('beforeend', `<circle cx="${p[0]}" cy="${p[1]}" r="3.5" fill="#4f6ef7"/>
+        <text x="${p[0]}" y="${p[1] - 9}" text-anchor="middle" font-size="10.5" font-weight="600" fill="var(--text-2)">${data[i].value}</text>`);
+    }
+  }
+  const every = Math.ceil(data.length / 8);
+  data.forEach((d, i) => {
+    if (i % every === 0 || i === data.length - 1) {
+      svg.insertAdjacentHTML('beforeend',
+        `<text x="${pts[i][0]}" y="${h - 8}" text-anchor="middle" font-size="10" fill="var(--text-3)">${esc(d.label)}</text>`);
+    }
+  });
+  return svg;
+}
+
+function truncate(s, n) { return s.length > n ? s.slice(0, n - 1) + '…' : s; }
+
+function emptyNote() {
+  const d = document.createElement('div');
+  d.className = 'dim';
+  d.style.cssText = 'padding:26px;text-align:center';
+  d.textContent = 'Пока нет данных для графика';
+  return d;
+}
+
+return { barChart, donutChart, lineChart };
+})();
+__M.zip = (function(){
+// zip.js — создание и чтение ZIP-архивов без внешних библиотек.
+// Запись: метод STORE (без сжатия — вложения и так сжаты: jpg/png/pdf).
+// Чтение: STORE + DEFLATE (через DecompressionStream, есть в Chrome/Edge/Safari 16.4+).
+
+const CRC_TABLE = (() => {
+  const t = new Uint32Array(256);
+  for (let n = 0; n < 256; n++) {
+    let c = n;
+    for (let k = 0; k < 8; k++) c = (c & 1) ? (0xEDB88320 ^ (c >>> 1)) : (c >>> 1);
+    t[n] = c >>> 0;
+  }
+  return t;
+})();
+
+function crc32(bytes) {
+  let c = 0xFFFFFFFF;
+  for (let i = 0; i < bytes.length; i++) c = CRC_TABLE[(c ^ bytes[i]) & 0xFF] ^ (c >>> 8);
+  return (c ^ 0xFFFFFFFF) >>> 0;
+}
+
+const enc = new TextEncoder();
+const dec = new TextDecoder();
+
+function dosDateTime(d = new Date()) {
+  const time = ((d.getHours() << 11) | (d.getMinutes() << 5) | (d.getSeconds() >> 1)) & 0xFFFF;
+  const date = (((d.getFullYear() - 1980) << 9) | ((d.getMonth() + 1) << 5) | d.getDate()) & 0xFFFF;
+  return { time, date };
+}
+
+/**
+ * Создать ZIP. entries: [{ name: 'path/in/zip', data: Uint8Array }]
+ * Возвращает Uint8Array.
+ */
+function createZip(entries) {
+  const { time, date } = dosDateTime();
+  const localParts = [], centralParts = [];
+  let offset = 0;
+
+  for (const e of entries) {
+    const nameBytes = enc.encode(e.name);
+    const data = e.data;
+    const crc = crc32(data);
+    const lh = new Uint8Array(30 + nameBytes.length);
+    const lv = new DataView(lh.buffer);
+    lv.setUint32(0, 0x04034b50, true);
+    lv.setUint16(4, 20, true);           // version needed
+    lv.setUint16(6, 0x0800, true);       // UTF-8 имена
+    lv.setUint16(8, 0, true);            // method STORE
+    lv.setUint16(10, time, true);
+    lv.setUint16(12, date, true);
+    lv.setUint32(14, crc, true);
+    lv.setUint32(18, data.length, true);
+    lv.setUint32(22, data.length, true);
+    lv.setUint16(26, nameBytes.length, true);
+    lv.setUint16(28, 0, true);
+    lh.set(nameBytes, 30);
+
+    const ch = new Uint8Array(46 + nameBytes.length);
+    const cv = new DataView(ch.buffer);
+    cv.setUint32(0, 0x02014b50, true);
+    cv.setUint16(4, 20, true);
+    cv.setUint16(6, 20, true);
+    cv.setUint16(8, 0x0800, true);
+    cv.setUint16(10, 0, true);
+    cv.setUint16(12, time, true);
+    cv.setUint16(14, date, true);
+    cv.setUint32(16, crc, true);
+    cv.setUint32(20, data.length, true);
+    cv.setUint32(24, data.length, true);
+    cv.setUint16(28, nameBytes.length, true);
+    cv.setUint32(42, offset, true);
+    ch.set(nameBytes, 46);
+
+    localParts.push(lh, data);
+    centralParts.push(ch);
+    offset += lh.length + data.length;
+  }
+
+  const centralSize = centralParts.reduce((a, p) => a + p.length, 0);
+  const eocd = new Uint8Array(22);
+  const ev = new DataView(eocd.buffer);
+  ev.setUint32(0, 0x06054b50, true);
+  ev.setUint16(8, entries.length, true);
+  ev.setUint16(10, entries.length, true);
+  ev.setUint32(12, centralSize, true);
+  ev.setUint32(16, offset, true);
+
+  const total = offset + centralSize + 22;
+  const out = new Uint8Array(total);
+  let pos = 0;
+  for (const p of [...localParts, ...centralParts, eocd]) { out.set(p, pos); pos += p.length; }
+  return out;
+}
+
+async function inflateRaw(bytes) {
+  if (typeof DecompressionStream === 'undefined') {
+    throw new Error('Архив сжат (deflate), а браузер не поддерживает распаковку. Используйте архив, созданный этим приложением.');
+  }
+  const ds = new DecompressionStream('deflate-raw');
+  const stream = new Blob([bytes]).stream().pipeThrough(ds);
+  const buf = await new Response(stream).arrayBuffer();
+  return new Uint8Array(buf);
+}
+
+/**
+ * Прочитать ZIP. Возвращает [{ name, data: Uint8Array }].
+ * Проверяет CRC32 каждой записи (контроль целостности).
+ */
+async function readZip(bytes) {
+  // Ищем End of Central Directory с конца
+  let eocd = -1;
+  for (let i = bytes.length - 22; i >= Math.max(0, bytes.length - 22 - 65536); i--) {
+    if (bytes[i] === 0x50 && bytes[i + 1] === 0x4b && bytes[i + 2] === 0x05 && bytes[i + 3] === 0x06) {
+      eocd = i; break;
+    }
+  }
+  if (eocd < 0) throw new Error('Файл не является корректным ZIP-архивом.');
+  const view = new DataView(bytes.buffer, bytes.byteOffset, bytes.byteLength);
+  const count = view.getUint16(eocd + 10, true);
+  let p = view.getUint32(eocd + 16, true);
+
+  const out = [];
+  for (let i = 0; i < count; i++) {
+    if (view.getUint32(p, true) !== 0x02014b50) throw new Error('Повреждён центральный каталог ZIP.');
+    const method = view.getUint16(p + 10, true);
+    const crcExpected = view.getUint32(p + 16, true);
+    const compSize = view.getUint32(p + 20, true);
+    const nameLen = view.getUint16(p + 28, true);
+    const extraLen = view.getUint16(p + 30, true);
+    const commentLen = view.getUint16(p + 32, true);
+    const localOff = view.getUint32(p + 42, true);
+    const name = dec.decode(bytes.subarray(p + 46, p + 46 + nameLen));
+
+    // локальный заголовок — длины полей могут отличаться
+    const lNameLen = view.getUint16(localOff + 26, true);
+    const lExtraLen = view.getUint16(localOff + 28, true);
+    const dataStart = localOff + 30 + lNameLen + lExtraLen;
+    const raw = bytes.subarray(dataStart, dataStart + compSize);
+
+    let data;
+    if (method === 0) data = new Uint8Array(raw);
+    else if (method === 8) data = await inflateRaw(raw);
+    else throw new Error(`Неподдерживаемый метод сжатия (${method}) у «${name}».`);
+
+    if (crc32(data) !== crcExpected) {
+      throw new Error(`Контрольная сумма не совпадает у «${name}» — архив повреждён.`);
+    }
+    if (!name.endsWith('/')) out.push({ name, data });
+    p += 46 + nameLen + extraLen + commentLen;
+  }
+  return out;
+}
+
+return { crc32, createZip, readZip };
+})();
+__M.export = (function(){
+// export.js — экспорт/импорт анкет (JSON и ZIP), резервное копирование и восстановление.
+// Формат обмена с WebStudio OS Local описан в docs/EXCHANGE_FORMAT.md.
+const db = __M.db;
+const { createZip, readZip } = __M.zip;
+const { buildExchange, validateExchange, fromExchange, EXCHANGE_FORMAT } = __M.logic;
+const { downloadBlob, nowISO, uuid } = __M.util;
+
+const enc = new TextEncoder();
+const dec = new TextDecoder();
+
+function stamp() { return nowISO().slice(0, 19).replace(/[:T]/g, '-'); }
+
+// ─────────────── Экспорт ───────────────
+async function exportJSON(qs) {
+  const payload = buildExchange(qs);
+  const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
+  const name = qs.length === 1
+    ? `anketa_${(qs[0].answers?.company_name || qs[0].id.slice(0, 8)).replace(/[^\wа-яА-ЯёЁ-]+/g, '_')}_${stamp()}.json`
+    : `anketas_${qs.length}_${stamp()}.json`;
+  downloadBlob(blob, name);
+  return name;
+}
+
+async function exportZIP(qs) {
+  const payload = buildExchange(qs);
+  const entries = [{ name: 'data.json', data: enc.encode(JSON.stringify(payload, null, 2)) }];
+  for (const q of qs) {
+    for (const ref of q.fileRefs || []) {
+      const rec = await db.getFile(ref.id);
+      if (rec && rec.blob) {
+        const buf = new Uint8Array(await rec.blob.arrayBuffer());
+        entries.push({ name: `files/${q.id}/${ref.id}_${ref.name}`, data: buf });
+      }
+    }
+  }
+  const zipBytes = createZip(entries);
+  const blob = new Blob([zipBytes], { type: 'application/zip' });
+  const name = qs.length === 1
+    ? `anketa_${(qs[0].answers?.company_name || qs[0].id.slice(0, 8)).replace(/[^\wа-яА-ЯёЁ-]+/g, '_')}_${stamp()}.zip`
+    : `backup_wsq_${stamp()}.zip`;
+  downloadBlob(blob, name);
+  return name;
+}
+
+// ─────────────── Импорт: разбор файла → предпросмотр ───────────────
+/**
+ * Разбирает файл (JSON или ZIP). Возвращает:
+ * { ok, errors[], items: [{ record, existing, filesCount }], zipFiles: Map<'qid/fileId_name', Uint8Array> }
+ */
+async function parseImportFile(file) {
+  let json = null;
+  const zipFiles = new Map();
+
+  try {
+    const bytes = new Uint8Array(await file.arrayBuffer());
+    const isZip = bytes.length > 4 && bytes[0] === 0x50 && bytes[1] === 0x4b; // сигнатура "PK"
+    if (isZip) {
+      const entries = await readZip(bytes);
+      const dataEntry = entries.find(e => e.name === 'data.json' || e.name.endsWith('/data.json'));
+      if (!dataEntry) return { ok: false, errors: ['В архиве нет файла data.json.'] };
+      json = JSON.parse(dec.decode(dataEntry.data));
+      for (const e of entries) {
+        const m = e.name.match(/^files\/([^/]+)\/(.+)$/);
+        if (m) zipFiles.set(m[1] + '/' + m[2], e.data);
+      }
+    } else {
+      json = JSON.parse(new TextDecoder().decode(bytes));
+    }
+  } catch (err) {
+    return { ok: false, errors: ['Не удалось прочитать файл: ' + err.message] };
+  }
+
+  const v = validateExchange(json);
+  if (!v.ok) return { ok: false, errors: v.errors };
+
+  const items = [];
+  for (const rec of json.questionnaires) {
+    const record = fromExchange(rec);
+    const existing = await db.getQuestionnaire(record.id);
+    items.push({
+      record,
+      existing: existing || null,
+      filesCount: (record.fileRefs || []).length,
+      filesAvailable: (record.fileRefs || []).filter(f => zipFiles.has(record.id + '/' + f.id + '_' + f.name)).length,
+    });
+  }
+  return {
+    ok: true, errors: [], items, zipFiles,
+    settings: json.settings || null,
+    meta: { format: json.format, version: json.version, exported_at: json.exported_at },
+  };
+}
+
+/**
+ * Применить импорт. decisions: Map<id, 'skip'|'overwrite'|'copy'>.
+ * Возвращает { imported, skipped, overwritten }.
+ */
+async function applyImport(parsed, decisions) {
+  let imported = 0, skipped = 0, overwritten = 0;
+  for (const item of parsed.items) {
+    const action = decisions.get(item.record.id) || (item.existing ? 'skip' : 'import');
+    if (action === 'skip') { skipped++; continue; }
+    let rec = item.record;
+    if (action === 'copy') {
+      const old = rec.id;
+      rec = { ...rec, id: uuid(), fileRefs: (rec.fileRefs || []).map(f => ({ ...f })) };
+      rec._origId = old;
+    }
+    if (action === 'overwrite' && item.existing) {
+      // удалить старые файлы перезаписываемой анкеты
+      const oldFiles = await db.getFilesByQ(rec.id);
+      for (const f of oldFiles) await db.deleteFile(f.id);
+      overwritten++;
+    } else {
+      imported++;
+    }
+    const srcId = rec._origId || rec.id;
+    const keptRefs = [];
+    for (const ref of rec.fileRefs || []) {
+      const key = srcId + '/' + ref.id + '_' + ref.name;
+      const data = parsed.zipFiles?.get(key);
+      const newRef = { ...ref, id: action === 'copy' ? uuid() : ref.id, qid: ref.qid };
+      if (data) {
+        await db.putFile({ ...newRef, blob: new Blob([data], { type: ref.type || 'application/octet-stream' }) });
+        keptRefs.push(newRef);
+      } else {
+        // файла в архиве нет (импорт из JSON) — сохраняем только описание
+        keptRefs.push({ ...newRef, missing: true });
+      }
+    }
+    delete rec._origId;
+    rec.fileRefs = keptRefs;
+    rec.history = rec.history || [];
+    rec.history.push({ at: nowISO(), event: 'Импортирована из файла обмена' });
+    await db.putQuestionnaire(rec);
+  }
+  return { imported, skipped, overwritten };
+}
+
+// ─────────────── Резервная копия (всё приложение) ───────────────
+async function createBackup() {
+  const qs = await db.getAllQuestionnaires();
+  const payload = buildExchange(qs);
+  payload.backup = true;
+  payload.settings = {
+    consent_text: await db.getSetting('consent_text') || null,
+  };
+  const entries = [{ name: 'data.json', data: enc.encode(JSON.stringify(payload, null, 2)) }];
+  const files = await db.getAllFiles();
+  const qids = new Set(qs.map(q => q.id));
+  for (const f of files) {
+    if (!qids.has(f.qid) && !qs.some(q => (q.fileRefs || []).some(r => r.id === f.id))) continue;
+    const owner = qs.find(q => (q.fileRefs || []).some(r => r.id === f.id));
+    if (!owner || !f.blob) continue;
+    entries.push({ name: `files/${owner.id}/${f.id}_${f.name}`, data: new Uint8Array(await f.blob.arrayBuffer()) });
+  }
+  const blob = new Blob([createZip(entries)], { type: 'application/zip' });
+  const name = `wsq_backup_${stamp()}.zip`;
+  downloadBlob(blob, name);
+  return { name, count: qs.length, files: entries.length - 1 };
+}
+
+/**
+ * Восстановление из резервной копии: перед заменой создаёт страховочную копию
+ * текущих данных (скачивается автоматически), затем заменяет всё содержимое.
+ */
+async function restoreBackup(file, { makeSafetyCopy = true } = {}) {
+  const parsed = await parseImportFile(file);
+  if (!parsed.ok) throw new Error(parsed.errors.join(' '));
+  if (makeSafetyCopy) {
+    const existing = await db.getAllQuestionnaires();
+    if (existing.length) await createBackup(); // страховочная копия текущих данных
+  }
+  await db.clearAllData();
+  // после очистки ни одной анкеты не существует — всё импортируется заново
+  await applyImport(parsed, new Map(parsed.items.map(i => [i.record.id, 'overwrite'])));
+  if (parsed.settings?.consent_text) {
+    await db.setSetting('consent_text', parsed.settings.consent_text);
+  }
+  return { restored: parsed.items.length };
+}
+
+return { exportJSON, exportZIP, parseImportFile, applyImport, createBackup, restoreBackup };
+})();
+__M.admin = (function(){
+// admin.js — административная панель: авторизация, дашборд, анкеты, импорт, бэкапы, настройки.
+const db = __M.db;
+const { STAGES, STATUSES, SITE_TYPES, DEFAULT_CONSENT_TEXT, getSiteType, getStatus } = __M.schema;
+const { visibleStages, visibleQuestions, displayValue, progress, buildSummary, summaryToText, logHistory, fullReportText } = __M.logic;
+const { esc, fmtDate, fmtSize, nowISO, uuid, toast, confirmDialog, hashPassword, verifyPassword, downloadBlob, copyText } = __M.util;
+const { barChart, donutChart, lineChart } = __M.charts;
+const { exportJSON, exportZIP, parseImportFile, applyImport, createBackup, restoreBackup } = __M.export;
+const { themeButton } = __M.theme;
+
+const authed = () => sessionStorage.getItem('wsq_admin') === '1';
+
+// ───────────────────────── Вход и первый запуск ─────────────────────────
+async function renderAdmin(app, hash) {
+  const adminRec = await db.getSetting('admin');
+  if (!adminRec) return renderSetup(app);
+  if (!authed()) return renderLogin(app);
+
+  const route = hash.replace(/^#\/admin\/?/, '');
+  if (route.startsWith('q/')) return layout(app, 'list', el => renderCard(el, route.slice(2)));
+  if (route.startsWith('summary/')) return layout(app, 'list', el => renderSummary(el, route.slice(8)));
+  if (route === 'list') return layout(app, 'list', renderList);
+  if (route === 'import') return layout(app, 'import', renderImport);
+  if (route === 'backup') return layout(app, 'backup', renderBackup);
+  if (route === 'settings') return layout(app, 'settings', renderSettings);
+  return layout(app, 'dash', renderDashboard);
+}
+
+function authScreen(app, title, subtitle, formHTML) {
+  app.className = 'container';
+  app.innerHTML = `
+    <div class="topbar"><div class="brand"><div class="logo">W</div> WebStudio Questionnaire</div>
+      <div class="nav-actions"></div></div>
+    <div class="card" style="max-width:420px;margin:60px auto 0">
+      <h2>${title}</h2>
+      <p class="muted" style="margin:8px 0 18px">${subtitle}</p>
+      ${formHTML}
+    </div>
+    <p style="text-align:center;margin-top:20px"><a class="dim" href="#/">← К анкете</a></p>`;
+  app.querySelector('.nav-actions').appendChild(themeButton());
+}
+
+async function renderSetup(app) {
+  authScreen(app, 'Настройка администратора',
+    'Первый запуск: создайте пароль для доступа к административной панели. Пароль хранится только в виде защищённого хеша на этом устройстве.',
+    `<div class="field"><label class="q-label">Пароль (не менее 6 символов)</label>
+       <input class="input" type="password" id="pw1" autocomplete="new-password"></div>
+     <div class="field"><label class="q-label">Повторите пароль</label>
+       <input class="input" type="password" id="pw2" autocomplete="new-password"></div>
+     <button class="btn btn-primary" id="go" style="width:100%">Создать администратора</button>`);
+  app.querySelector('#go').onclick = async () => {
+    const p1 = app.querySelector('#pw1').value, p2 = app.querySelector('#pw2').value;
+    if (p1.length < 6) return toast('Пароль должен быть не короче 6 символов', 'error');
+    if (p1 !== p2) return toast('Пароли не совпадают', 'error');
+    const rec = await hashPassword(p1);
+    await db.setSetting('admin', { ...rec, created_at: nowISO() });
+    sessionStorage.setItem('wsq_admin', '1');
+    toast('Администратор создан', 'success');
+    location.hash = '#/admin';
+    renderAdmin(app, '#/admin');
+  };
+}
+
+async function renderLogin(app) {
+  authScreen(app, 'Вход для администратора', 'Введите пароль, чтобы открыть панель управления анкетами.',
+    `<div class="field"><label class="q-label">Пароль</label>
+       <input class="input" type="password" id="pw" autocomplete="current-password" data-enter-submit="1"></div>
+     <button class="btn btn-primary" id="go" style="width:100%">Войти</button>`);
+  const tryLogin = async () => {
+    const rec = await db.getSetting('admin');
+    const ok = await verifyPassword(app.querySelector('#pw').value, rec);
+    if (!ok) return toast('Неверный пароль', 'error');
+    sessionStorage.setItem('wsq_admin', '1');
+    renderAdmin(app, location.hash);
+  };
+  app.querySelector('#go').onclick = tryLogin;
+  app.querySelector('#pw').onkeydown = e => { if (e.key === 'Enter') tryLogin(); };
+}
+
+// ───────────────────────── Каркас панели ─────────────────────────
+const NAV = [
+  ['dash', '#/admin', '📊', 'Дашборд'],
+  ['list', '#/admin/list', '📋', 'Анкеты'],
+  ['import', '#/admin/import', '📥', 'Импорт'],
+  ['backup', '#/admin/backup', '💾', 'Резервные копии'],
+  ['settings', '#/admin/settings', '⚙️', 'Настройки'],
+];
+
+async function layout(app, active, content) {
+  app.className = '';
+  app.innerHTML = `
+    <div class="admin-layout">
+      <aside class="sidebar no-print">
+        <div class="brand"><div class="logo">W</div><span class="side-title">Questionnaire</span></div>
+        ${NAV.map(([id, href, ic, lbl]) =>
+          `<a class="navlink ${id === active ? 'on' : ''}" href="${href}">${ic} <span>${lbl}</span></a>`).join('')}
+        <div style="flex:1"></div>
+        <a class="navlink" href="#/" id="nav-exit-client">🏠 <span>К анкете</span></a>
+        <a class="navlink" id="nav-logout">🚪 <span>Выйти</span></a>
+      </aside>
+      <main class="admin-main"><div id="admin-content"></div></main>
+    </div>`;
+  app.querySelector('#nav-logout').onclick = () => {
+    sessionStorage.removeItem('wsq_admin');
+    location.hash = '#/admin';
+    renderAdmin(app, '#/admin');
+  };
+  await content(app.querySelector('#admin-content'));
+}
+
+function pageHeader(el, title, actionsHTML = '', backHref = null) {
+  el.insertAdjacentHTML('beforeend', `
+    <div class="topbar" style="padding-top:0">
+      <div class="topbar-left">
+        ${backHref ? `<a class="btn btn-ghost btn-icon no-print" href="${backHref}" aria-label="Назад" title="Назад">←</a>` : ''}
+        <h1>${title}</h1>
+      </div>
+      <div class="nav-actions no-print">${actionsHTML}</div>
+    </div>`);
+  el.querySelector('.nav-actions').appendChild(themeButton());
+}
+
+// ───────────────────────── Дашборд ─────────────────────────
+async function renderDashboard(el) {
+  const all = await db.getAllQuestionnaires();
+  pageHeader(el, 'Дашборд');
+
+  const by = (fn) => all.reduce((m, q) => { const k = fn(q); m[k] = (m[k] || 0) + 1; return m; }, {});
+  const byStatus = by(q => q.status);
+  const newCount = (byStatus.completed || 0); // завершённые клиентом, но ещё не «отправлена/в работе»
+  const stat = (num, lbl) => `<div class="card stat"><div class="num">${num}</div><div class="lbl">${lbl}</div></div>`;
+
+  el.insertAdjacentHTML('beforeend', `
+    <div class="statgrid">
+      ${stat(all.length, 'Всего анкет')}
+      ${stat(byStatus.completed || 0, 'Завершённые')}
+      ${stat((byStatus.draft || 0) + (byStatus.progress || 0), 'В работе у клиентов')}
+      ${stat(byStatus.sent || 0, 'Отправленные')}
+      ${stat(byStatus.archived || 0, 'В архиве')}
+    </div>
+    <div id="recent"></div>
+    <div class="chartgrid">
+      <div class="card"><h3 style="margin-bottom:12px">Распределение по статусам</h3><div id="ch-status"></div></div>
+      <div class="card"><h3 style="margin-bottom:12px">Анкеты по типам сайтов</h3><div id="ch-types"></div></div>
+      <div class="card" style="grid-column:1/-1"><h3 style="margin-bottom:12px">Динамика поступления (30 дней)</h3><div id="ch-line"></div></div>
+    </div>`);
+
+  const fresh = all.filter(q => q.status === 'completed')
+    .sort((x, y) => (y.completed_at || '').localeCompare(x.completed_at || '')).slice(0, 5);
+  if (fresh.length) {
+    const box = document.createElement('div');
+    box.className = 'card';
+    box.style.marginBottom = '14px';
+    box.innerHTML = `<h3 style="margin-bottom:6px">Новые анкеты — ждут обработки (${byStatus.completed})</h3>`;
+    for (const q of fresh) {
+      const a = q.answers || {};
+      const type = getSiteType(a.site_type);
+      const r = document.createElement('div');
+      r.className = 'recent-row';
+      r.innerHTML = `<span class="rt">${esc(a.company_name || a.contact_name || 'Без названия')}</span>
+        <span class="dim">${type ? esc(type.label) : ''} · ${fmtDate(q.completed_at)}</span>`;
+      r.onclick = () => location.hash = '#/admin/q/' + q.id;
+      box.appendChild(r);
+    }
+    el.querySelector('#recent').appendChild(box);
+  }
+
+  const statusColors = { draft: '#8a91a0', progress: '#2563eb', completed: '#16a34a', sent: '#7c3aed', archived: '#6b7280' };
+  const donut = donutChart(STATUSES.map(s => ({ label: s.label, value: byStatus[s.id] || 0, color: statusColors[s.id] })));
+  el.querySelector('#ch-status').appendChild(donut.el);
+
+  const byType = by(q => q.answers?.site_type || '_none');
+  el.querySelector('#ch-types').appendChild(barChart(
+    SITE_TYPES.map(t => ({ label: t.label, value: byType[t.id] || 0 }))
+      .concat(byType._none ? [{ label: 'Тип не выбран', value: byType._none }] : [])
+  ));
+
+  // динамика за 30 дней
+  const days = [];
+  for (let i = 29; i >= 0; i--) {
+    const d = new Date(); d.setDate(d.getDate() - i);
+    const key = d.toISOString().slice(0, 10);
+    days.push({ key, label: `${d.getDate()}.${String(d.getMonth() + 1).padStart(2, '0')}`, value: 0 });
+  }
+  for (const q of all) {
+    const k = (q.created_at || '').slice(0, 10);
+    const day = days.find(d => d.key === k);
+    if (day) day.value++;
+  }
+  el.querySelector('#ch-line').appendChild(lineChart(days));
+
+  if (!all.length) {
+    el.insertAdjacentHTML('beforeend', `<div class="card" style="margin-top:14px;text-align:center;padding:30px">
+      <p class="muted">Анкет пока нет. Отправьте клиенту ссылку на приложение или <a href="#/">заполните анкету</a> вместе с ним.</p></div>`);
+  }
+}
+
+// ───────────────────────── Список анкет ─────────────────────────
+async function renderList(el) {
+  const all = await db.getAllQuestionnaires();
+  pageHeader(el, 'Анкеты', '', '#/admin');
+  el.insertAdjacentHTML('beforeend', `
+    <div class="filters no-print">
+      <input class="input" id="f-search" placeholder="Поиск: компания, имя, телефон…">
+      <select class="input" id="f-type"><option value="">Все типы</option>
+        ${SITE_TYPES.map(t => `<option value="${t.id}">${t.label}</option>`).join('')}</select>
+      <select class="input" id="f-status"><option value="">Все статусы</option>
+        ${STATUSES.map(s => `<option value="${s.id}">${s.label}</option>`).join('')}</select>
+      <select class="input" id="f-budget"><option value="">Любой бюджет</option>
+        <option value="<10">До 10 т.</option><option value="10-20">10–20 т.</option>
+        <option value="20-35">20–35 т.</option><option value="35-50">35–50 т.</option>
+        <option value="50-100">50–100 т.</option><option value="100+">100 т.+</option>
+        <option value="tbd">Не определён</option><option value="offer">Ждёт предложение</option></select>
+      <label class="datefield"><span>Создана с</span><input class="input" id="f-from" type="date"></label>
+      <label class="datefield"><span>Создана по</span><input class="input" id="f-to" type="date"></label>
+      <select class="input" id="f-sort">
+        <option value="new">Сначала новые</option><option value="old">Сначала старые</option>
+        <option value="name">По названию</option></select>
+      <button class="btn btn-ghost btn-sm" id="f-reset" style="align-self:flex-end">Сбросить</button>
+    </div>
+    <div class="selbar card no-print" id="selbar" hidden>
+      <b id="selcount"></b>
+      <button class="btn btn-ghost btn-sm" id="sel-all">Выбрать все показанные</button>
+      <button class="btn btn-ghost btn-sm" id="sel-archive">В архив</button>
+      <button class="btn btn-ghost btn-sm" id="sel-zip">Экспорт ZIP</button>
+      <button class="btn btn-danger btn-sm" id="sel-del">Удалить</button>
+      <button class="btn btn-ghost btn-sm" id="sel-clear">Снять выбор</button>
+    </div>
+    <div class="qlist" id="rows"></div>
+    <p class="dim" id="count" style="margin-top:10px"></p>`);
+
+  const rowsEl = el.querySelector('#rows');
+  const selected = new Set();
+  let shown = [];
+  const refresh = async () => { el.innerHTML = ''; await renderList(el); };
+  const updateBar = () => {
+    const bar = el.querySelector('#selbar');
+    bar.hidden = selected.size === 0;
+    el.querySelector('#selcount').textContent = `Выбрано: ${selected.size}`;
+  };
+  const deleteMany = async (ids) => {
+    const one = ids.length === 1 ? all.find(x => x.id === ids[0]) : null;
+    const title = one ? 'Удалить анкету?' : `Удалить анкет: ${ids.length}?`;
+    const text = one
+      ? `Анкета «${one.answers?.company_name || one.answers?.contact_name || 'без названия'}» и все её файлы будут удалены безвозвратно. Рекомендуем сначала сделать экспорт или резервную копию.`
+      : `Выбранные анкеты (${ids.length} шт.) и все их файлы будут удалены безвозвратно. Рекомендуем сначала сделать резервную копию.`;
+    if (!(await confirmDialog(title, text, { okLabel: 'Удалить навсегда', danger: true }))) return;
+    for (const id of ids) await db.deleteQuestionnaire(id);
+    toast(ids.length === 1 ? 'Анкета удалена' : `Удалено анкет: ${ids.length}`, 'info');
+    await refresh();
+  };
+  el.querySelector('#sel-all').onclick = () => {
+    shown.forEach(q => selected.add(q.id));
+    rowsEl.querySelectorAll('.qrow').forEach(r => { r.classList.add('sel'); const c = r.querySelector('.rowchk'); if (c) c.checked = true; });
+    updateBar();
+  };
+  el.querySelector('#sel-clear').onclick = () => {
+    selected.clear();
+    rowsEl.querySelectorAll('.qrow').forEach(r => { r.classList.remove('sel'); const c = r.querySelector('.rowchk'); if (c) c.checked = false; });
+    updateBar();
+  };
+  el.querySelector('#sel-del').onclick = () => deleteMany([...selected]);
+  el.querySelector('#sel-zip').onclick = async () => {
+    const qs = all.filter(q => selected.has(q.id));
+    await exportZIP(qs);
+    toast(`Выгружено анкет: ${qs.length}`, 'success');
+  };
+  el.querySelector('#sel-archive').onclick = async () => {
+    for (const q of all.filter(x => selected.has(x.id))) {
+      q.status = 'archived'; q.updated_at = nowISO();
+      logHistory(q, 'Анкета перенесена в архив (массовое действие)');
+      await db.putQuestionnaire(q);
+    }
+    toast(`В архив: ${selected.size}`, 'success');
+    await refresh();
+  };
+  el.querySelector('#f-reset').onclick = () => {
+    el.querySelectorAll('.filters .input').forEach(i => { i.value = i.tagName === 'SELECT' && i.id === 'f-sort' ? 'new' : ''; });
+    apply();
+  };
+  const apply = () => {
+    const s = el.querySelector('#f-search').value.trim().toLowerCase();
+    const ft = el.querySelector('#f-type').value;
+    const fs = el.querySelector('#f-status').value;
+    const fb = el.querySelector('#f-budget').value;
+    const from = el.querySelector('#f-from').value;
+    const to = el.querySelector('#f-to').value;
+    const sort = el.querySelector('#f-sort').value;
+
+    let list = all.filter(q => {
+      const a = q.answers || {};
+      if (ft && a.site_type !== ft) return false;
+      if (fs && q.status !== fs) return false;
+      if (fb && a.budget !== fb) return false;
+      const d = (q.created_at || '').slice(0, 10);
+      if (from && d < from) return false;
+      if (to && d > to) return false;
+      if (s) {
+        const hay = [a.company_name, a.brand_name, a.contact_name, a.contact_phone, a.contact_email, a.city, a.industry]
+          .filter(Boolean).join(' ').toLowerCase();
+        if (!hay.includes(s)) return false;
+      }
+      return true;
+    });
+    list.sort((x, y) => sort === 'old' ? (x.created_at || '').localeCompare(y.created_at || '')
+      : sort === 'name' ? String(x.answers?.company_name || 'я').localeCompare(String(y.answers?.company_name || 'я'), 'ru')
+      : (y.updated_at || '').localeCompare(x.updated_at || ''));
+
+    rowsEl.innerHTML = '';
+    shown = list;
+    if (!list.length) {
+      rowsEl.innerHTML = `<div class="card empty"><div class="big">${all.length ? '🔍' : '📭'}</div>
+        ${all.length ? 'Ничего не найдено — измените или сбросьте фильтры' : 'Анкет пока нет'}</div>`;
+    }
+    for (const q of list) {
+      const a = q.answers || {};
+      const st = getStatus(q.status);
+      const type = getSiteType(a.site_type);
+      const p = progress(q);
+      const row = document.createElement('div');
+      row.className = 'card qrow' + (selected.has(q.id) ? ' sel' : '');
+      row.innerHTML = `
+        <input type="checkbox" class="rowchk" aria-label="Выбрать" ${selected.has(q.id) ? 'checked' : ''}>
+        <div class="qmain">
+          <div class="qtitle">${esc(a.company_name || a.contact_name || 'Без названия')}</div>
+          <div class="qsub">${type ? type.icon + ' ' + esc(type.label) + ' · ' : ''}${fmtDate(q.updated_at)} · ${p.percent}% · ${esc(a.contact_phone || a.contact_email || '')}</div>
+        </div>
+        <span class="badge badge-${st.color}">${st.label}</span>
+        <button class="btn btn-ghost btn-icon btn-sm row-del" title="Удалить анкету" aria-label="Удалить">🗑</button>`;
+      const chk = row.querySelector('.rowchk');
+      chk.onclick = e => e.stopPropagation();
+      chk.onchange = () => {
+        chk.checked ? selected.add(q.id) : selected.delete(q.id);
+        row.classList.toggle('sel', chk.checked);
+        updateBar();
+      };
+      row.querySelector('.row-del').onclick = async (e) => {
+        e.stopPropagation();
+        await deleteMany([q.id]);
+      };
+      row.onclick = () => location.hash = '#/admin/q/' + q.id;
+      rowsEl.appendChild(row);
+    }
+    updateBar();
+    el.querySelector('#count').textContent = `Показано: ${list.length} из ${all.length}`;
+  };
+  el.querySelectorAll('.filters .input').forEach(i => i.addEventListener('input', apply));
+  apply();
+}
+
+// ───────────────────────── Карточка анкеты ─────────────────────────
+async function renderCard(el, id) {
+  const q = await db.getQuestionnaire(id);
+  if (!q) { el.innerHTML = '<div class="card"><p>Анкета не найдена.</p><a href="#/admin/list">← К списку</a></div>'; return; }
+  const a = q.answers || {};
+  const st = getStatus(q.status);
+  const type = getSiteType(a.site_type);
+  const p = progress(q);
+
+  pageHeader(el, esc(a.company_name || a.contact_name || 'Анкета'), '', '#/admin/list');
+
+  el.insertAdjacentHTML('beforeend', `
+    <div class="card" style="margin-bottom:14px">
+      <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:12px">
+        <span class="badge badge-${st.color}">${st.label}</span>
+        ${type ? `<span class="badge badge-gray">${type.icon} ${esc(type.label)}</span>` : ''}
+        <span class="badge badge-gray">Заполнено ${p.percent}%</span>
+        <span class="dim">Создана ${fmtDate(q.created_at)} · изменена ${fmtDate(q.updated_at)}${q.completed_at ? ' · завершена ' + fmtDate(q.completed_at) : ''}</span>
+      </div>
+      <div class="kv">
+        <div class="k">Контакт</div><div class="v">${esc(a.contact_name || '—')} ${a.contact_company ? '(' + esc(a.contact_company) + ')' : ''}</div>
+        <div class="k">Телефон</div><div class="v">${a.contact_phone ? `<a href="tel:${esc(a.contact_phone)}">${esc(a.contact_phone)}</a>` : '—'}</div>
+        <div class="k">Telegram / Email</div><div class="v">${esc([a.contact_telegram, a.contact_email].filter(Boolean).join(' · ') || '—')}</div>
+        <div class="k">Бюджет / сроки</div><div class="v">${esc([labelOf('budget', a.budget), labelOf('deadline', a.deadline)].filter(Boolean).join(' · ') || '—')}</div>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:16px" class="no-print">
+        <a class="btn btn-primary btn-sm" href="#/admin/summary/${q.id}">📄 Сводка</a>
+        <button class="btn btn-ghost btn-sm" id="b-copy">📋 Копировать весь итог</button>
+        <button class="btn btn-ghost btn-sm" id="b-json">Экспорт JSON</button>
+        <button class="btn btn-ghost btn-sm" id="b-zip">Экспорт ZIP (с файлами)</button>
+        <a class="btn btn-ghost btn-sm" href="#/survey/${q.id}">✏️ Редактировать ответы</a>
+        <button class="btn btn-ghost btn-sm" id="b-archive">${q.status === 'archived' ? 'Вернуть из архива' : 'В архив'}</button>
+        <button class="btn btn-danger btn-sm" id="b-del">Удалить</button>
+      </div>
+      <div style="display:flex;gap:8px;align-items:center;margin-top:14px" class="no-print">
+        <span class="dim">Статус:</span>
+        <select class="input" id="status-sel" style="width:auto;padding:7px 32px 7px 12px">
+          ${STATUSES.map(s => `<option value="${s.id}" ${s.id === q.status ? 'selected' : ''}>${s.label}</option>`).join('')}
+        </select>
+      </div>
+    </div>
+
+    <div class="card" style="margin-bottom:14px">
+      <h3 style="margin-bottom:10px">Заметки администратора</h3>
+      <div id="notes"></div>
+      <div style="display:flex;gap:8px;margin-top:10px" class="no-print">
+        <input class="input" id="note-inp" placeholder="Новая заметка…">
+        <button class="btn btn-primary" id="note-add">Добавить</button>
+      </div>
+    </div>
+
+    <div class="card" style="margin-bottom:14px">
+      <h3 style="margin-bottom:10px">Файлы клиента (${(q.fileRefs || []).length})</h3>
+      <div class="filelist" id="files">${(q.fileRefs || []).length ? '' : '<span class="dim">Файлы не прикреплялись</span>'}</div>
+    </div>
+
+    <div id="answers"></div>
+
+    <div class="card" style="margin-top:14px">
+      <h3 style="margin-bottom:10px">История изменений</h3>
+      <div id="history" class="dim" style="font-size:13px"></div>
+    </div>`);
+
+  // статус
+  el.querySelector('#status-sel').onchange = async (e) => {
+    const old = getStatus(q.status).label;
+    q.status = e.target.value;
+    q.updated_at = nowISO();
+    logHistory(q, `Статус изменён: ${old} → ${getStatus(q.status).label}`);
+    await db.putQuestionnaire(q);
+    toast('Статус обновлён', 'success');
+    renderAdminRefresh(el, id);
+  };
+
+  // действия
+  el.querySelector('#b-copy').onclick = async () => {
+    (await copyText(fullReportText(q))) ? toast('Весь итог скопирован', 'success') : toast('Не удалось скопировать', 'error');
+  };
+  el.querySelector('#b-json').onclick = async () => { await exportJSON([q]); toast('JSON выгружен', 'success'); markSent(q); };
+  el.querySelector('#b-zip').onclick = async () => { await exportZIP([q]); toast('ZIP выгружен', 'success'); markSent(q); };
+  el.querySelector('#b-archive').onclick = async () => {
+    q.status = q.status === 'archived' ? 'completed' : 'archived';
+    q.updated_at = nowISO();
+    logHistory(q, q.status === 'archived' ? 'Анкета перенесена в архив' : 'Анкета возвращена из архива');
+    await db.putQuestionnaire(q);
+    renderAdminRefresh(el, id);
+  };
+  el.querySelector('#b-del').onclick = async () => {
+    const ok = await confirmDialog('Удалить анкету?',
+      `Анкета «${a.company_name || 'без названия'}» и все её файлы будут удалены безвозвратно. Рекомендуем сначала сделать экспорт.`,
+      { okLabel: 'Удалить навсегда', danger: true });
+    if (!ok) return;
+    await db.deleteQuestionnaire(q.id);
+    toast('Анкета удалена', 'info');
+    location.hash = '#/admin/list';
+  };
+
+  // заметки
+  const notesEl = el.querySelector('#notes');
+  const drawNotes = () => {
+    notesEl.innerHTML = (q.notes || []).length
+      ? q.notes.map(n => `<div class="note">${esc(n.text)}<div class="dim">${fmtDate(n.created_at)}
+          <button class="fdel no-print" data-id="${n.id}" style="float:right">✕</button></div></div>`).join('')
+      : '<span class="dim">Заметок нет</span>';
+    notesEl.querySelectorAll('.fdel').forEach(b => b.onclick = async () => {
+      q.notes = q.notes.filter(n => n.id !== b.dataset.id);
+      await db.putQuestionnaire(q);
+      drawNotes();
+    });
+  };
+  drawNotes();
+  el.querySelector('#note-add').onclick = async () => {
+    const inp = el.querySelector('#note-inp');
+    if (!inp.value.trim()) return;
+    q.notes = q.notes || [];
+    q.notes.push({ id: uuid(), text: inp.value.trim(), created_at: nowISO() });
+    q.updated_at = nowISO();
+    await db.putQuestionnaire(q);
+    inp.value = '';
+    drawNotes();
+    toast('Заметка добавлена', 'success');
+  };
+
+  // файлы
+  const filesEl = el.querySelector('#files');
+  for (const ref of q.fileRefs || []) {
+    const item = document.createElement('div');
+    item.className = 'fileitem';
+    item.innerHTML = `<span>📄</span><span class="fname">${esc(ref.name)}</span>
+      <span class="dim">${fmtSize(ref.size)}${ref.missing ? ' · нет содержимого (импорт из JSON)' : ''}</span>
+      ${ref.missing ? '' : '<button class="btn btn-ghost btn-sm">Скачать</button>'}`;
+    const btn = item.querySelector('button');
+    if (btn) btn.onclick = async () => {
+      const rec = await db.getFile(ref.id);
+      if (rec?.blob) downloadBlob(rec.blob, ref.name);
+      else toast('Содержимое файла недоступно', 'error');
+    };
+    filesEl.appendChild(item);
+  }
+
+  // ответы по этапам
+  const ansEl = el.querySelector('#answers');
+  for (const stg of visibleStages(q)) {
+    let rows = '';
+    for (const question of visibleQuestions(stg, q)) {
+      const v = displayValue(question, a[question.id], q);
+      rows += `<div class="k">${esc(question.label)}</div>
+        <div class="v">${v == null ? '<span class="dim">—</span>' : Array.isArray(v) ? esc(v.join('\n')) : esc(v)}</div>`;
+    }
+    ansEl.insertAdjacentHTML('beforeend', `
+      <div class="card section-block"><h3>${stg.icon} ${esc(stg.title)}</h3><div class="kv">${rows}</div></div>`);
+  }
+
+  // история
+  el.querySelector('#history').innerHTML = (q.history || []).slice().reverse()
+    .map(h => `${fmtDate(h.at)} — ${esc(h.event)}`).join('<br>') || 'Пусто';
+}
+
+function renderAdminRefresh(el, id) {
+  // мягкая перерисовка карточки
+  const content = document.getElementById('admin-content');
+  if (content) { content.innerHTML = ''; renderCard(content, id); }
+}
+
+async function markSent(q) {
+  if (q.status === 'completed') {
+    q.status = 'sent';
+    q.updated_at = nowISO();
+    logHistory(q, 'Анкета экспортирована (помечена как отправленная)');
+    await db.putQuestionnaire(q);
+  }
+}
+
+function labelOf(qid, val) {
+  if (!val) return null;
+  for (const st of STAGES) {
+    const question = st.questions.find(x => x.id === qid);
+    if (question?.options && Array.isArray(question.options)) {
+      return question.options.find(o => o.id === val)?.label || val;
+    }
+  }
+  return val;
+}
+
+// ───────────────────────── Сводка ─────────────────────────
+async function renderSummary(el, id) {
+  const q = await db.getQuestionnaire(id);
+  if (!q) { el.innerHTML = '<div class="card">Анкета не найдена.</div>'; return; }
+  const sections = buildSummary(q);
+
+  pageHeader(el, 'Сводка по клиенту', '', `#/admin/q/${q.id}`);
+  el.insertAdjacentHTML('beforeend', `
+    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px" class="no-print">
+      <button class="btn btn-primary btn-sm" id="s-pdf">🖨️ Печать / Сохранить в PDF</button>
+      <button class="btn btn-ghost btn-sm" id="s-copy">Копировать сводку</button>
+      <button class="btn btn-ghost btn-sm" id="s-copyall">📋 Копировать весь итог</button>
+      <button class="btn btn-ghost btn-sm" id="s-json">Экспорт JSON</button>
+      <button class="btn btn-ghost btn-sm" id="s-zip">Экспорт ZIP</button>
+    </div>
+    <div class="card" id="sum">
+      <h2 style="margin-bottom:4px">${esc(q.answers?.company_name || 'Клиент')}</h2>
+      <p class="dim" style="margin-bottom:16px">Сводка сформирована ${fmtDate(nowISO())} · WebStudio Questionnaire</p>
+      ${sections.map(s => `
+        <div class="section-block"><h3>${esc(s.title)}</h3><div class="kv">
+          ${s.items.map(it => `<div class="k">${esc(it.label)}</div>
+            <div class="v">${Array.isArray(it.value) ? esc(it.value.join('\n')) : esc(it.value)}</div>`).join('')}
+        </div></div>`).join('')}
+    </div>`);
+
+  el.querySelector('#s-pdf').onclick = () => window.print();
+  el.querySelector('#s-copy').onclick = async () => {
+    (await copyText(summaryToText(q))) ? toast('Сводка скопирована', 'success') : toast('Не удалось скопировать автоматически', 'error');
+  };
+  el.querySelector('#s-copyall').onclick = async () => {
+    (await copyText(fullReportText(q))) ? toast('Весь итог скопирован', 'success') : toast('Не удалось скопировать автоматически', 'error');
+  };
+  el.querySelector('#s-json').onclick = () => exportJSON([q]).then(() => toast('JSON выгружен', 'success'));
+  el.querySelector('#s-zip').onclick = () => exportZIP([q]).then(() => toast('ZIP выгружен', 'success'));
+}
+
+// ───────────────────────── Импорт ─────────────────────────
+async function renderImport(el) {
+  pageHeader(el, 'Импорт анкет', '', '#/admin');
+  el.insertAdjacentHTML('beforeend', `
+    <div class="card">
+      <p class="muted" style="margin-bottom:14px">Загрузите файл обмена — <b>JSON</b> (только данные) или <b>ZIP</b> (данные + прикреплённые файлы),
+      созданный WebStudio Questionnaire на другом устройстве или WebStudio OS Local.</p>
+      <div class="dropzone" id="dz">📥 Нажмите, чтобы выбрать файл для импорта<br><span class="dim">.json или .zip</span></div>
+      <input type="file" id="fi" accept=".json,.zip" hidden>
+      <div id="preview" style="margin-top:16px"></div>
+    </div>`);
+
+  const fi = el.querySelector('#fi');
+  el.querySelector('#dz').onclick = () => fi.click();
+  fi.onchange = async () => {
+    const file = fi.files[0];
+    if (!file) return;
+    const prev = el.querySelector('#preview');
+    prev.innerHTML = '<p class="dim">Проверка файла…</p>';
+    const parsed = await parseImportFile(file);
+    if (!parsed.ok) {
+      prev.innerHTML = `<div class="note" style="background:var(--red-soft)">
+        <b>Импорт невозможен:</b><br>${parsed.errors.map(esc).join('<br>')}</div>`;
+      return;
+    }
+    const decisions = new Map();
+    prev.innerHTML = `
+      <p class="muted">Файл корректен: формат <b>${esc(parsed.meta.format)}</b> v${parsed.meta.version},
+        выгружен ${fmtDate(parsed.meta.exported_at)}. Анкет: <b>${parsed.items.length}</b>.</p>
+      <div id="items" style="margin-top:10px"></div>
+      <button class="btn btn-primary" id="apply" style="margin-top:14px">Импортировать</button>`;
+    const itemsEl = prev.querySelector('#items');
+    for (const item of parsed.items) {
+      const a = item.record.answers || {};
+      const dup = !!item.existing;
+      if (dup) decisions.set(item.record.id, 'skip');
+      const row = document.createElement('div');
+      row.className = 'fileitem';
+      row.style.marginBottom = '6px';
+      row.innerHTML = `
+        <span>${dup ? '⚠️' : '🆕'}</span>
+        <span class="fname">${esc(a.company_name || a.contact_name || item.record.id.slice(0, 8))}
+          <span class="dim">· ${getStatus(item.record.status).label} · файлов: ${item.filesAvailable}/${item.filesCount}</span></span>
+        ${dup ? `<select class="input" style="width:auto;padding:6px 30px 6px 10px;font-size:13px">
+            <option value="skip">Пропустить (дубликат)</option>
+            <option value="overwrite">Перезаписать существующую</option>
+            <option value="copy">Импортировать как копию</option>
+          </select>` : '<span class="badge badge-green">Новая</span>'}`;
+      const sel = row.querySelector('select');
+      if (sel) sel.onchange = () => decisions.set(item.record.id, sel.value);
+      itemsEl.appendChild(row);
+    }
+    prev.querySelector('#apply').onclick = async () => {
+      const hasOverwrite = [...decisions.values()].includes('overwrite');
+      if (hasOverwrite) {
+        const ok = await confirmDialog('Перезаписать данные?',
+          'Некоторые существующие анкеты будут заменены данными из файла. Это действие необратимо.',
+          { okLabel: 'Перезаписать', danger: true });
+        if (!ok) return;
+      }
+      try {
+        const res = await applyImport(parsed, decisions);
+        toast(`Импортировано: ${res.imported}, перезаписано: ${res.overwritten}, пропущено: ${res.skipped}`, 'success', 5000);
+        prev.innerHTML = '';
+        fi.value = '';
+      } catch (err) {
+        toast('Ошибка импорта: ' + err.message, 'error', 6000);
+      }
+    };
+  };
+}
+
+// ───────────────────────── Резервные копии ─────────────────────────
+async function renderBackup(el) {
+  pageHeader(el, 'Резервные копии', '', '#/admin');
+  const all = await db.getAllQuestionnaires();
+  el.insertAdjacentHTML('beforeend', `
+    <div class="card" style="margin-bottom:14px">
+      <h3>Создать резервную копию</h3>
+      <p class="muted" style="margin:8px 0 14px">В копию входят все анкеты (${all.length} шт.), прикреплённые файлы и настройки.
+      Файл сохранится в загрузки — перенесите его в надёжное место.</p>
+      <button class="btn btn-primary" id="mk">💾 Создать копию (.zip)</button>
+    </div>
+    <div class="card">
+      <h3>Восстановить из копии</h3>
+      <p class="muted" style="margin:8px 0 6px">Восстановление <b>заменит все текущие данные</b> содержимым копии.</p>
+      <p class="muted" style="margin:0 0 14px">Перед заменой автоматически скачается страховочная копия текущих данных.</p>
+      <button class="btn btn-ghost" id="rs">♻️ Выбрать файл копии…</button>
+      <input type="file" id="rsf" accept=".zip,.json" hidden>
+    </div>
+    <div class="card" style="margin-top:14px">
+      <h3>Совет для iPhone</h3>
+      <p class="muted" style="margin-top:8px">iOS может очищать данные браузера при нехватке места. Регулярно создавайте копию
+      и сохраняйте её в «Файлы» или отправляйте себе — так анкеты не потеряются.</p>
+    </div>`);
+
+  el.querySelector('#mk').onclick = async () => {
+    try {
+      const res = await createBackup();
+      toast(`Копия создана: ${res.name} (анкет: ${res.count}, файлов: ${res.files})`, 'success', 5000);
+    } catch (err) { toast('Ошибка: ' + err.message, 'error', 6000); }
+  };
+  const rsf = el.querySelector('#rsf');
+  el.querySelector('#rs').onclick = () => rsf.click();
+  rsf.onchange = async () => {
+    const file = rsf.files[0];
+    if (!file) return;
+    const ok = await confirmDialog('Восстановить из копии?',
+      'Все текущие анкеты и файлы будут заменены данными из копии. Страховочная копия текущих данных скачается автоматически.',
+      { okLabel: 'Восстановить', danger: true });
+    if (!ok) { rsf.value = ''; return; }
+    try {
+      const res = await restoreBackup(file);
+      toast(`Восстановлено анкет: ${res.restored}`, 'success', 5000);
+      location.hash = '#/admin';
+    } catch (err) {
+      toast('Восстановление не выполнено: ' + err.message, 'error', 7000);
+    }
+    rsf.value = '';
+  };
+}
+
+// ───────────────────────── Настройки ─────────────────────────
+async function renderSettings(el) {
+  pageHeader(el, 'Настройки', '', '#/admin');
+  const consent = await db.getSetting('consent_text') || DEFAULT_CONSENT_TEXT;
+  el.insertAdjacentHTML('beforeend', `
+    <div class="card" style="margin-bottom:14px">
+      <h3>Смена пароля администратора</h3>
+      <div class="field" style="margin-top:12px"><label class="q-label">Текущий пароль</label>
+        <input class="input" type="password" id="p-old"></div>
+      <div class="field"><label class="q-label">Новый пароль (не менее 6 символов)</label>
+        <input class="input" type="password" id="p-new"></div>
+      <button class="btn btn-primary" id="p-save">Сменить пароль</button>
+    </div>
+    <div class="card" style="margin-bottom:14px">
+      <h3>Текст согласия на обработку данных</h3>
+      <p class="dim" style="margin:6px 0 10px">Показывается клиенту на последнем шаге анкеты. Текст не является юридически
+      проверенным документом — при необходимости согласуйте формулировку с юристом.</p>
+      <textarea class="input" id="c-text" style="min-height:120px">${esc(consent)}</textarea>
+      <div style="display:flex;gap:8px;margin-top:10px">
+        <button class="btn btn-primary btn-sm" id="c-save">Сохранить</button>
+        <button class="btn btn-ghost btn-sm" id="c-reset">Вернуть стандартный</button>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Экспорт всех анкет</h3>
+      <p class="muted" style="margin:8px 0 12px">Выгрузка всех анкет одним файлом — для переноса в WebStudio OS Local или на другое устройство.</p>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <button class="btn btn-ghost btn-sm" id="e-json">Все анкеты → JSON</button>
+        <button class="btn btn-ghost btn-sm" id="e-zip">Все анкеты → ZIP (с файлами)</button>
+      </div>
+    </div>`);
+
+  el.querySelector('#p-save').onclick = async () => {
+    const rec = await db.getSetting('admin');
+    if (!(await verifyPassword(el.querySelector('#p-old').value, rec))) return toast('Текущий пароль неверен', 'error');
+    const np = el.querySelector('#p-new').value;
+    if (np.length < 6) return toast('Новый пароль слишком короткий', 'error');
+    const newRec = await hashPassword(np);
+    await db.setSetting('admin', { ...newRec, created_at: rec.created_at, updated_at: nowISO() });
+    toast('Пароль изменён', 'success');
+    el.querySelector('#p-old').value = el.querySelector('#p-new').value = '';
+  };
+  el.querySelector('#c-save').onclick = async () => {
+    await db.setSetting('consent_text', el.querySelector('#c-text').value.trim());
+    toast('Текст согласия сохранён', 'success');
+  };
+  el.querySelector('#c-reset').onclick = async () => {
+    await db.setSetting('consent_text', null);
+    el.querySelector('#c-text').value = DEFAULT_CONSENT_TEXT;
+    toast('Возвращён стандартный текст', 'info');
+  };
+  el.querySelector('#e-json').onclick = async () => exportJSON(await db.getAllQuestionnaires()).then(() => toast('JSON выгружен', 'success'));
+  el.querySelector('#e-zip').onclick = async () => exportZIP(await db.getAllQuestionnaires()).then(() => toast('ZIP выгружен', 'success'));
+}
+
+return { renderAdmin };
+})();
+__M.keyboard = (function(){
+// keyboard.js — удобство экранной клавиатуры на телефоне:
+//  • панель «Готово» над клавиатурой (прячет клавиатуру);
+//  • Enter в однострочном поле закрывает клавиатуру;
+//  • тап по пустому месту закрывает клавиатуру;
+//  • поле в фокусе прокручивается в видимую зону.
+
+const TEXTLIKE = new Set(['text', 'search', 'tel', 'email', 'url', 'number', 'password', 'date', '']);
+
+function isTextField(el) {
+  if (!el || !el.tagName) return false;
+  if (el.tagName === 'TEXTAREA') return true;
+  return el.tagName === 'INPUT' && TEXTLIKE.has((el.getAttribute('type') || '').toLowerCase());
+}
+
+function initKeyboardHelper() {
+  const touch = matchMedia('(pointer: coarse)').matches || 'ontouchstart' in window;
+  if (!touch) return;
+
+  const bar = document.createElement('div');
+  bar.className = 'kbd-bar no-print';
+  bar.innerHTML = '<button type="button" class="btn btn-primary btn-sm" id="kbd-done">Готово ⌄</button>';
+  document.body.appendChild(bar);
+  const vv = window.visualViewport;
+
+  const place = () => {
+    const bottom = vv ? Math.max(0, window.innerHeight - vv.height - vv.offsetTop) : 0;
+    bar.style.bottom = bottom + 'px';
+  };
+  const hide = () => bar.classList.remove('show');
+  const show = () => { place(); bar.classList.add('show'); };
+
+  if (vv) { vv.addEventListener('resize', place); vv.addEventListener('scroll', place); }
+
+  // не отбираем фокус у поля при нажатии на кнопку
+  bar.addEventListener('mousedown', e => e.preventDefault());
+  bar.querySelector('#kbd-done').addEventListener('click', () => {
+    document.activeElement?.blur();
+    hide();
+  });
+
+  document.addEventListener('focusin', e => {
+    if (!isTextField(e.target)) return;
+    show();
+    // дать клавиатуре открыться, затем показать поле
+    setTimeout(() => {
+      place();
+      try { e.target.scrollIntoView({ block: 'center', behavior: 'smooth' }); } catch (_) {}
+    }, 320);
+  });
+  document.addEventListener('focusout', () => {
+    setTimeout(() => { if (!isTextField(document.activeElement)) hide(); }, 80);
+  });
+
+  // Enter в однострочном поле = закрыть клавиатуру
+  document.addEventListener('keydown', e => {
+    const t = e.target;
+    if (e.key === 'Enter' && t.tagName === 'INPUT' && isTextField(t)) {
+      if (t.dataset.enterSubmit) return; // поля, где Enter имеет свой смысл (вход админа)
+      e.preventDefault();
+      t.blur();
+      hide();
+    }
+  });
+
+  // Тап по пустому месту — закрыть клавиатуру
+  document.addEventListener('click', e => {
+    if (!isTextField(document.activeElement)) return;
+    if (e.target.closest('input, textarea, select, button, a, label, .chip, .typecard, .seg, .kbd-bar, .modal')) return;
+    document.activeElement.blur();
+    hide();
+  });
+}
+
+return { initKeyboardHelper };
+})();
+__M.app = (function(){
+// app.js — точка входа: тема, маршрутизация, регистрация service worker.
+const { requestPersistence, getSetting, setSetting } = __M.db;
+const { renderHome, renderSurvey, renderReview, renderDone } = __M.survey;
+const { renderAdmin } = __M.admin;
+const { toast } = __M.util;
+const { initKeyboardHelper } = __M.keyboard;
+const { initTheme } = __M.theme;
+
+// ---------- Маршрутизация ----------
+async function route() {
+  const hash = location.hash || '#/';
+  const app = document.getElementById('app');
+  app.className = hash.startsWith('#/admin') ? '' : 'container';
+  window.scrollTo(0, 0);
+  try {
+    if (hash.startsWith('#/survey/')) await renderSurvey(app, hash.split('/')[2]);
+    else if (hash.startsWith('#/review/')) await renderReview(app, hash.split('/')[2]);
+    else if (hash.startsWith('#/done')) await renderDone(app);
+    else if (hash.startsWith('#/admin')) await renderAdmin(app, hash);
+    else await renderHome(app);
+  } catch (err) {
+    console.error(err);
+    app.innerHTML = `<div class="card" style="margin-top:40px">
+      <h2>Что-то пошло не так</h2>
+      <p class="muted" style="margin:10px 0">${(err && err.message) || 'Неизвестная ошибка'}. Данные анкет не пострадали — они хранятся локально.</p>
+      <a class="btn btn-primary" href="#/">На главную</a></div>`;
+  }
+}
+
+window.addEventListener('hashchange', route);
+
+// ---------- Запуск ----------
+initTheme();
+initKeyboardHelper();
+requestPersistence();
+route();
+
+// Service worker — оффлайн-режим (работает по http/https, не по file://)
+try { if (navigator.serviceWorker) navigator.serviceWorker.getRegistrations().then(function(rs){ rs.forEach(function(r){ r.unregister(); }); }).catch(function(){}); if (window.caches) caches.keys().then(function(ks){ ks.forEach(function(k){ caches.delete(k); }); }).catch(function(){}); } catch (e) {}
+
+// Глобальная защита: сообщаем о непойманных ошибках, не теряя данные
+window.addEventListener('unhandledrejection', e => {
+  console.error(e.reason);
+  if (String(e.reason?.name) === 'QuotaExceededError') {
+    toast('Недостаточно места в хранилище браузера. Удалите лишние файлы или сделайте резервную копию.', 'error', 6000);
+  }
+});
+
+return {  };
+})();
+
+</script>
+</body>
+</html>
